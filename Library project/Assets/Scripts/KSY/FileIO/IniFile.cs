@@ -1,7 +1,7 @@
 /*
 Programmer : KangSYEON
       Date : 7/6/2023
-   Purpose : I/O .ini File
+   Purpose : I/O .ini File.
 */
 
 #region About INI File
@@ -12,12 +12,6 @@ INI 파일은 config 파일의 표준입니다.
 [섹션]
 키 = 값
 의 구성으로 데이터를 저장할 수 있습니다.
-
-사용방법
-IniEx.cs 참고
-
-환경설정의 용도로 사용할 예정이기 때문에 Application.persistentDataPath를 기본 Path로 사용합니다.
-
 */
 #endregion
 
@@ -57,6 +51,21 @@ Purpose : 게임의 현재 상태를 저장. (Ex. 현재 위치, 현재 플레�
 */
 #endregion
 
+#region How to use
+/*
+사용방법
+IniEx.cs 참고
+
+아래 클래스는 경로를 매개변수로 하여 ini 파일을 읽고 쓸 수 있도록 하는 인스턴스를 생성합니다.
+인스턴스를 통해 ini 파일을 읽고 쓸 수 잇습니다.
+
+config의 용도로 사용할 예정이기 때문에 Application.persistentDataPath를 기본 Path로 사용합니다.
+하지만 _basePath를 배열로 생성해 매개변수를 추가로 받는 방식으로 확장할 수 있습니다.
+
+추후 가비지콜렉터(using{})을 강제하는 방식으로 발전시킬 수 있을 것 같습니다.
+*/
+#endregion
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -87,10 +96,6 @@ public class IniFile
         _filePath = _basePath + (filePath ?? "config" + ".ini");
         _strBuilderSize = strBuilderSize;
 
-        if(Path.GetExtension(_filePath) != ".ini"){
-            Debug.Log("@ERROR@ 확장자가 .ini가 아닌 파일을 IniFile로 읽어오려 했습니다. ");
-        }
-
         if(!File.Exists(_filePath))
         {
             File.Create(_filePath);
@@ -103,6 +108,7 @@ public class IniFile
             Debug.Log($"INI 파일을 정상적으로 찾았습니다. name : {_filePath}");
         }
     }
+
     public string Read(string section, string key, string defaultVal = ""){
         var temp = new StringBuilder(_strBuilderSize);
         GetPrivateProfileString(section, key, defaultVal, temp, _strBuilderSize, _filePath);

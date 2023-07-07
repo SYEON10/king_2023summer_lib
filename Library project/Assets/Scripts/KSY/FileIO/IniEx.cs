@@ -1,3 +1,9 @@
+/*
+Programmer : KangSYEON
+      Date : 7/6/2023
+   Purpose : I/O .ini File
+*/
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

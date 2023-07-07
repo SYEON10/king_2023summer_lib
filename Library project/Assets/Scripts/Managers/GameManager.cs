@@ -26,6 +26,25 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    private ResourceManager _resource = new ResourceManager();
+
+    public static ResourceManager Resource
+    {
+        get
+        {
+            return GetGM._resource;
+        }
+    }
+    
+    private UIManager _ui = new UIManager();
+    public static UIManager UI
+    {
+        get
+        {
+            return GetGM._ui;
+        }
+    }
+
     void Start()
     {
         Init();
