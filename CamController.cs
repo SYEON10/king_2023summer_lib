@@ -15,14 +15,14 @@ public class CamController : MonoBehaviour
  
     void Update()
     {
-        if (Input.GetMouseButton(1)) //¿ìÅ¬¸¯
+        if (Input.GetMouseButton(1)) //Â¿Ã¬Ã…Â¬Â¸Â¯
         {
             xmove += Input.GetAxis("Mouse X"); 
             ymove -= Input.GetAxis("Mouse Y"); 
         }
         transform.rotation = Quaternion.Euler(ymove*2, xmove*2, 0);
 
-        if (Input.GetMouseButtonDown(2)) //ÈÙÅ¬¸¯
+        if (Input.GetMouseButtonDown(2)) //ÃˆÃ™Ã…Â¬Â¸Â¯
             toggleView = 4 - toggleView;
 
         if (toggleView == 1)
@@ -33,11 +33,7 @@ public class CamController : MonoBehaviour
         else if (toggleView == 3)
         {
             Vector3 reverseDistance = new Vector3(0.0f, 0.0f, distance);
-            transform.position = Vector3.SmoothDamp(
-                transform.position,
-                player.transform.position - transform.rotation * reverseDistance,
-                ref velocity,
-                SmoothTime);
+            transform.position = player.transform.position - transform.rotation * reverseDistance;
         }
     }
 }
