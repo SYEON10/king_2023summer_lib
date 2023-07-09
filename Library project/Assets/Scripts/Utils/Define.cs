@@ -9,4 +9,12 @@ public class Define
         Click,
         Drag,
     }
+    
+    public enum CreatureState
+    {
+        Idle,
+        Moving,
+        Skill,
+        Dead,
+    }
 }
