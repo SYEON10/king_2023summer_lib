@@ -1,5 +1,0 @@
-sceneSetups:
-- path: Assets/Scenes/LSY(A)-Test/WEEK1.unity
-  isLoaded: 1
-  isActive: 1
-  isSubScene: 0
