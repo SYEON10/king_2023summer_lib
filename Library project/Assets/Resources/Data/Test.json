@@ -1,0 +1,28 @@
+{
+  "users": [
+    {
+      "userId": 1,
+      "firstName": "AAAAA",
+      "lastName": "as23",
+      "phoneNumber": "123456",
+      "emailAddress": "AAAAA@test.com",
+      "homepage": "https://amogg.tistory.com/1"
+    },
+    {
+      "userId": 2,
+      "firstName": "BBBBB",
+      "lastName": "as23",
+      "phoneNumber": "123456",
+      "emailAddress": "AAAAA@test.com",
+      "homepage": "https://amogg.tistory.com/1"
+    },
+    {
+      "userId": 3,
+      "firstName": "CCCCC",
+      "lastName": "as23",
+      "phoneNumber": "123456",
+      "emailAddress": "AAAAA@test.com",
+      "homepage": "https://amogg.tistory.com/1"
+    }
+  ]
+}

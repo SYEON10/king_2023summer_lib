@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.PlayerLoop;
 
@@ -32,7 +33,7 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return GetGM._resource;
+            return _instance._resource;
         }
     }
     
@@ -41,13 +42,24 @@ public class GameManager : MonoBehaviour
     {
         get
         {
-            return GetGM._ui;
+            return _instance._ui;
+        }
+    }
+
+    private DataManager _data = new DataManager();
+
+    public static DataManager Data
+    {
+        get
+        {
+            return _instance._data;
         }
     }
 
     void Start()
     {
         Init();
+        _instance._data.Init();
     }
 
     

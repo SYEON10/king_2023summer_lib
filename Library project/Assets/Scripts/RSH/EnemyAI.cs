@@ -102,13 +102,13 @@ public class EnemyAI : MonoBehaviour
 	
 	IEnumerator CoPatrol()
 	{
-		int waitSeconds = Random.Range(1, 4);
+		int waitSeconds = UnityEngine.Random.Range(1, 4);
 		yield return new WaitForSeconds(waitSeconds);
 
 		for (int i = 0; i < 10; i++)
 		{
-			int xRange = Random.Range(-5, 6);
-			int zRange = Random.Range(-5, 6);
+			int xRange = UnityEngine.Random.Range(-5, 6);
+			int zRange = UnityEngine.Random.Range(-5, 6);
 			Vector3 randPos = transform.position + new Vector3(xRange, 0, zRange);
 
 			_destPos = randPos;
