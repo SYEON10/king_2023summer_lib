@@ -1,4 +1,5 @@
 /*
+  [Not Finished]
 Programmer : KangSYEON
       Date : 7/7/2023
    Purpose : I/O .ini File.
@@ -25,9 +26,9 @@ class User
     [SerializeField]
     private string homepage;
 
-    public void PrintUserId()
+    public void PrintName()
     {
-        Debug.Log("printName : " + firstName);
+        Debug.Log("printName : " + userId);
     }
 }
 public class JsonEx : MonoBehaviour
@@ -35,9 +36,8 @@ public class JsonEx : MonoBehaviour
     void Start()
     {
         JsonFile file = new JsonFile("Scripts/KSY/FileIO/Test");
-        List<User> list = new List<User>();
-        list = file.Read<List<User>>();
-        Debug.Log(list.Count);
-        //list[0].PrintUserId();
+        User user = new User();
+        user = file.Read<User>();
+        user.PrintName();
     }
 }
