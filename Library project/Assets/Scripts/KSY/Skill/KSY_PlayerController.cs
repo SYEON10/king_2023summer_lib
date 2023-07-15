@@ -2,11 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class KSY_PlayerController : MonoBehaviour
 {
     private KSY_Skill _skill;
     public void Start()
     {
+        Player.player = gameObject;
+        
         _skill = new KSY_Skill();
         GameManager.Input.KeyAction -= SkilUpdate;
         GameManager.Input.KeyAction += SkilUpdate;
