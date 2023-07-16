@@ -11,7 +11,7 @@ public class Jump1 : MonoBehaviour
 
     void Start()
     {
-        rigid = GetComponent<Rigidbody>();      //Rigidbody ÄÄÆ÷³ÍÆ®¸¦ ¹Þ¾Æ¿È
+        rigid = GetComponent<Rigidbody>(); 
     }
 
     void Update()
