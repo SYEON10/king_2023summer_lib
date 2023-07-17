@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
 {
     private static GameManager _instance;
 
-    public static GameManager GetGM
+    static GameManager GetGM
     {
         get
         {
@@ -18,7 +18,7 @@ public class GameManager : MonoBehaviour
 
     private InputManager _input = new InputManager();
 
-    static InputManager Input
+    public static InputManager Input
     {
         get
         {
