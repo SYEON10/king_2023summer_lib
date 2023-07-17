@@ -431,6 +431,9 @@ GameObject:
   - component: {fileID: 1925543486}
   - component: {fileID: 1925543487}
   - component: {fileID: 1925543488}
+  - component: {fileID: 1925543489}
+  - component: {fileID: 1925543490}
+  - component: {fileID: 1925543491}
   m_Layer: 0
   m_Name: Cylinder
   m_TagString: Untagged
@@ -577,7 +580,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847c3b9f64d17e4429ab74f53e57e322, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 5
 --- !u!114 &1925543488
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925543480}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82e5cf4dd8991134798b729df8c7d13a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5
+--- !u!114 &1925543489
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925543480}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24b80d0290fcf2f4f92a7d12530b42ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpForce: 5
+--- !u!114 &1925543490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -586,6 +616,27 @@ MonoBehaviour:
   m_GameObject: {fileID: 1925543480}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e5cf4dd8991134798b729df8c7d13a, type: 3}
+  m_Script: {fileID: 11500000, guid: 713cbd68a0090344191fa20a67e0d0a1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 5
+  jumpDuration: 0.5
+  jumpStartTime: 0
+  isJumping: 0
+  isGround: 0
+  rigid: {fileID: 0}
+  moveVec: {x: 0, y: 0, z: 0}
+--- !u!114 &1925543491
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1925543480}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 469a225cbe341cb43bf71a3757ef38b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpSpeed: 5
+  jumpAngle: 45

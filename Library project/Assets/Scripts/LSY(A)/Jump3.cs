@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class Jump3 : MonoBehaviour
 {
+    [SerializeField] 
     float jumpForce = 5f;
+
     float jumpDuration = 0.5f;
     float jumpStartTime;
-    bool isJumping;
-    bool isGround;
+    bool isJumping; // isJumping 변수 (점프 중인지를 나타냄 -> 점프 중: true, 아니면: false)
 
     Rigidbody rigid;
     Vector3 moveVec;
@@ -20,7 +21,7 @@ public class Jump3 : MonoBehaviour
 
     void Update()
     {
-        if (isGround && Input.GetKeyDown(KeyCode.Space))
+        if (!isJumping && Input.GetKeyDown(KeyCode.Space))
         {
             Jump();
         }
@@ -46,15 +47,8 @@ public class Jump3 : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Ground"))
         {
-            isGround = true;
+            isJumping = false;  // 땅에 닿으면 점프 중이 아니라고 표시
         }
     }
-
-    void OnCollisionExit(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            isGround = false;
-        }
-    }
+   
 }
