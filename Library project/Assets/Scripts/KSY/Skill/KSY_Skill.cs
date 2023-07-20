@@ -37,7 +37,7 @@ class Bochgun : AttackSkill
     public Bochgun(){}
     public override void ActivateSkill()
     {
-        _spear = GameManager.Resource.Instantiate("Weapon/Spear");
+        _spear = GameManager.Resources.Instantiate("Weapon/Spear");
         _spear.transform.position = Player.player.transform.position + new Vector3(2.0f, 0, 0); //나중에 변수로 빼겠습니다...
         GameManager.Input.KeyAction -= Aiming;
         GameManager.Input.KeyAction += Aiming;

@@ -1,39 +1,41 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Util
 {
-    public static T GetOrAddComponent<T>(GameObject go) where T : UnityEngine.Component
+    public static T GetOrAddComponent<T>(GameObject obj) where T : UnityEngine.Component
     {
-        T component = go.GetComponent<T>();
+        T component = obj.GetComponent<T>();
         if (component == null)
-            component = go.AddComponent<T>();
+        {
+            component = obj.AddComponent<T>();
+            Debug.Log($"@ERROR@ Component is missing > AddComponent in {obj}");
+        }
         return component;
     }
-
-    public static GameObject FindChild(GameObject go, string name = null, bool recursive = false)
+    public static GameObject FindChild(GameObject parent, string name = null, bool recursive = false)
     {
-        Transform transform = FindChild<Transform>(go, name, recursive);
-        if (transform == null)
-            return null;
-
-        return transform.gameObject;
+        Transform temp = FindChild<Transform>(parent, name, recursive);
+        if (temp != null)
+            return temp.gameObject;
+        return null;
     }
-
-    public static T FindChild<T>(GameObject go, string name = null, bool recursive = false) where T : UnityEngine.Object
+    public static T FindChild<T>(GameObject parent, string name = null, bool recursive = false) where T : UnityEngine.Object
     {
-        if (go == null)
+        if (parent == null)
             return null;
 
-        if (recursive == false)
+        if(recursive == false)
         {
-            for (int i = 0; i < go.transform.childCount; i++)
+            for(int i = 0; i < parent.transform.childCount; i++)
             {
-                Transform transform = go.transform.GetChild(i);
-                if (string.IsNullOrEmpty(name) || transform.name == name)
+                Transform child = parent.transform.GetChild(i);
+                if(string.IsNullOrEmpty(name) || child.name == name)
                 {
-                    T component = transform.GetComponent<T>();
+                    T component = child.GetComponent<T>();
                     if (component != null)
                         return component;
                 }
@@ -41,15 +43,13 @@ public class Util
         }
         else
         {
-            foreach (T component in go.GetComponentsInChildren<T>())
-            {
-                if (string.IsNullOrEmpty(name) || component.name == name)
-                    return component;
+            foreach(T component in parent.GetComponentsInChildren<T>()) 
+            { 
+                if (string.IsNullOrEmpty(name) || component.name == name) 
+                    return component; 
             }
         }
 
         return null;
     }
-
-
 }

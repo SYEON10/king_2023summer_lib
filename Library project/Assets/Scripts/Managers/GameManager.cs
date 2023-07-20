@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private ResourceManager _resource = new ResourceManager();
 
-    public static ResourceManager Resource
+    public static ResourceManager Resources
     {
         get
         {
