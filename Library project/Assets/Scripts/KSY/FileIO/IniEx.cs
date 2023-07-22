@@ -1,9 +1,3 @@
-/*
-Programmer : KangSYEON
-      Date : 7/6/2023
-   Purpose : I/O .ini File
-*/
-
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,8 +15,8 @@ public class IniEx : MonoBehaviour
         string test1 = ini.Read("SECTION", "Key", "5");
         string test2 = ini.Read("TEST", "Test2");
         
-        Debug.Log("data : " + test1 + " dtype : " + test1.GetType());
-        Debug.Log("data : " + test2 + " dtype : " + test2.GetType());
+        Debug.Log("data : " + test1);
+        Debug.Log("data : " + test2);
         
         ini.DeleteKey("Test", "Test1");
         ini.DeleteSection("DELETE");
