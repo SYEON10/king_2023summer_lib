@@ -41,4 +41,33 @@ public class M_DialogueData : CsvLoader<M_Dialogue>
 
 #endregion
 
+#region  M_Dialogue2
+
+public class M_Dialogue2{
+    public string _name;
+    public string _content;
+    public string _selection;
+
+    public M_Dialogue2(string name, string content, string selection){
+        _name = name;
+        _content = content;
+        _selection = selection;
+    }
+
+}
+
+public class M_DialogueData2 : CsvLoader<M_Dialogue2>
+{
+    public List<M_Dialogue2> List
+    {
+        get => _list;
+        set => _list = value; 
+    }
+    public override M_Dialogue2 MakeInstance(string[] parse)
+    {
+        return new M_Dialogue2(parse[0], parse[1], parse[2]);
+    }
+}
+
+#endregion
 

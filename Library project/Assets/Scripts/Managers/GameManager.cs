@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();
-        _instance._data.Init();
+        //_instance._data.Init();
     }
 
     
