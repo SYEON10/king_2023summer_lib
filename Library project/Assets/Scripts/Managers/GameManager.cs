@@ -29,7 +29,7 @@ public class GameManager : MonoBehaviour
 
     private ResourceManager _resource = new ResourceManager();
 
-    public static ResourceManager Resource
+    public static ResourceManager Resources
     {
         get
         {
@@ -59,7 +59,7 @@ public class GameManager : MonoBehaviour
     void Start()
     {
         Init();
-        _instance._data.Init();
+        //_instance._data.Init();
     }
 
     
