@@ -26,6 +26,13 @@ public class ResourceManager
         return go;
     }
 
+    public GameObject Instantiate(string path, Vector3 position, Transform parent = null)
+    {
+        GameObject obj = Instantiate(path, parent);
+        obj.transform.position = position;
+        return obj;
+    }
+
     public void Destroy(GameObject go)
     {
         if (go == null)

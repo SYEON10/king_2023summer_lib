@@ -1,18 +1,17 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 using UnityEngine.EventSystems;
 
 public static class Extension
 {
-    public static T GetOrAddComponent<T>(this GameObject go) where T : UnityEngine.Component
+    public static T GetOrAddComponent<T>(this GameObject obj) where T : UnityEngine.Component
     {
-        return Util.GetOrAddComponent<T>(go);
+        return Util.GetOrAddComponent<T>(obj);
     }
-
-    public static void BindEvent(this GameObject go, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
+    public static void BindUIEvent(this GameObject obj, Action<PointerEventData> action, Define.UIEvent type = Define.UIEvent.Click)
     {
-        UI_Base.BindEvent(go, action, type);
+        UI_Base.BindUIEvent(obj, action, type);
     }
 }
