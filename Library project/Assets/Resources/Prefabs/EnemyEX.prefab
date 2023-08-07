@@ -98,11 +98,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67ce6f4b4206444928c67b8bb52f7fae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: 5
+  _speed: 10
   _state: 0
   _destPos: {x: 0, y: 0, z: 0}
-  _target: {fileID: 0}
-  _searchRange: 9
+  _target: {fileID: 989912932421309034, guid: 1145fc4f7c6030145b5339b8bf6717f0, type: 3}
+  _searchRange: 30
 --- !u!65 &4813093672710600101
 BoxCollider:
   m_ObjectHideFlags: 0
