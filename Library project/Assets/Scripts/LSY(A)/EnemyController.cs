@@ -25,21 +25,16 @@ public class EnemyController : MonoBehaviour
         float distance = Vector3.Distance(transform.position, playerTransform.position);
         Debug.Log("Distance: " + distance);
 
-        // 거리가 임계값보다 작으면 적을 투명하게 만듦
+        // 거리가 임계값보다 작으면 적을 비활성화
         if (distance < distanceThreshold)
         {
-            if (!isTransparent)
-            {
-                SetTransparency(true);
-                isTransparent = true;
-            }
+            gameObject.SetActive(false); // 이 코드를 통해 적 비활성화
         }
         else
         {
-            if (isTransparent)
+            if (!gameObject.activeSelf)
             {
-                SetTransparency(false);
-                isTransparent = false;
+                gameObject.SetActive(true); // 거리가 다시 멀어지면 적 활성화
             }
         }
 
@@ -54,16 +49,6 @@ public class EnemyController : MonoBehaviour
         // 적을 현재 방향으로 이동시킴
         Move();
         Debug.Log("isTransparent: " + isTransparent); // 디버그 메시지로 투명 여부 출력
-    }
-
-    private void SetTransparency(bool transparent)
-    {
-        if (rend != null)
-        {
-            Color color = rend.material.color;
-            color.a = transparent ? 0.5f : 1f;
-            rend.material.color = color;
-        }
     }
 
     private void SetRandomDirection()
