@@ -1,9 +1,8 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TriggerTEst : MonoBehaviour
+public class BossController : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
