@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerAttack : MonoBehaviour
 {
     Rigidbody rb;
-    float power = 10f;
-    float distanceThreshold = 1f; // 플레이어의 적 공격 가능 범위거리
+    float _speed = 10f;
+    float distanceThreshold = 5f; // 플레이어의 적 공격 가능 범위거리
     bool canAttack = true;
     float CoolTime = 5f; // 재공격 가능할 때까지의 시간 
     float LeftCoolTime = 0f; // 쿨타임 끝나기까지 남은 시간
@@ -17,7 +17,50 @@ public class PlayerAttack : MonoBehaviour
     {
         rb = gameObject.GetComponent<Rigidbody>();
     }
+    void Update()
+    {
+        if (Input.GetKey(KeyCode.W))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.4f);
+            transform.position += Vector3.forward * Time.deltaTime * _speed;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.4f);
+            transform.position += Vector3.back * Time.deltaTime * _speed;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.4f);
+            transform.position += Vector3.left * Time.deltaTime * _speed;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.4f);
+            transform.position += Vector3.right * Time.deltaTime * _speed;
+        }
 
+        if (canAttack)
+        {
+            Attack();
+        }
+        // 공격 후 쿨타임동안 재공격 불가능 
+        else
+        {
+            if (LeftCoolTime > 0f) // 쿨타임 이내 
+            {
+                LeftCoolTime -= Time.deltaTime;
+                Debug.Log("Cooldown: " + Mathf.Round(LeftCoolTime) + " seconds left.");
+            }
+            else // 쿨타임 종료 
+            {
+                canAttack = true;
+                LeftCoolTime = 0f;
+            }
+        }
+
+    }
+    /*
     void FixedUpdate()
     {
         // 이동 
@@ -57,7 +100,7 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
-
+    */
     void Attack() // 거리가 임계 거리 이하면 공격 
     {
         GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
