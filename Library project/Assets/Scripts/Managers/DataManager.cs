@@ -9,6 +9,12 @@ public interface IJsonLoader<TKey,TValue>
     Dictionary<TKey, TValue> MakeDict();
 }
 
+/*
+파일 내에서
+[Start]
+[End]
+를 기준으로 Dictionary를 생성
+*/
 public abstract class CsvLoader<TValue>
 {
     protected List<TValue> _list = new List<TValue>();
