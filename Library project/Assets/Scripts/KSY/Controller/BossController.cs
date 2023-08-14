@@ -8,9 +8,7 @@ public class BossController : MonoBehaviour
     {
         if (other.name != "Player")
         {
-            GameObject _player = GameObject.Find("Player");
-            GameManager.Resources.Destroy(_player);
-            GameManager.UI.ShowPopupUI<UI_GameOver>();
+            //GameOver();
         }
     }
 }

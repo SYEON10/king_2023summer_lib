@@ -10,6 +10,7 @@ public class Define
     {
         Lobby,
         Game,
+        Boss,
         Unknown,
     }
 

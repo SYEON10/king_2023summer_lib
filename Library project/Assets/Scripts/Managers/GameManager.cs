@@ -6,9 +6,10 @@ using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
+    public int EnemyCount;
+    #region Managers
     private static GameManager _instance;
-
-    static GameManager GetGM
+    static GameManager GetGm
     {
         get
         {
@@ -18,43 +19,20 @@ public class GameManager : MonoBehaviour
     }
 
     private InputManager _input = new InputManager();
-
-    public static InputManager Input
-    {
-        get
-        {
-            return GetGM._input;
-        }
-    }
-
     private ResourceManager _resource = new ResourceManager();
-
-    public static ResourceManager Resources
-    {
-        get
-        {
-            return _instance._resource;
-        }
-    }
-    
     private UIManager _ui = new UIManager();
-    public static UIManager UI
-    {
-        get
-        {
-            return _instance._ui;
-        }
-    }
-
     private DataManager _data = new DataManager();
-
-    public static DataManager Data
-    {
-        get
-        {
-            return _instance._data;
-        }
-    }
+    private SceneManagerEx _scene = new SceneManagerEx();
+    private PoolManager _pool = new PoolManager();
+    
+    public static InputManager Input { get { return _instance._input; } }
+    public static ResourceManager Resources { get { return _instance._resource; } }
+    public static UIManager UI { get { return _instance._ui; } }
+    public static DataManager Data { get { return _instance._data; } }
+    public static SceneManagerEx Scene { get { return _instance._scene; } }
+    public static PoolManager Pool  { get { return _instance._pool; } }
+    
+    #endregion
 
     void Start()
     {

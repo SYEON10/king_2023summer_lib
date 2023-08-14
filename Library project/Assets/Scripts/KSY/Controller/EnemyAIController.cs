@@ -5,8 +5,8 @@ using UnityEngine;
 
 public class EnemyAIController : MonoBehaviour
 {
-    private IEnumerator coroutine = null;
-    private int enemyCount = 1;
+    private IEnumerator _enemyCoroutine = null;
+
     [SerializeField] private float spawningTime = 100.0f;
     
     private GameObject enemyParent = null;
@@ -17,35 +17,44 @@ public class EnemyAIController : MonoBehaviour
     [SerializeField] private int minInclusive_Z = 450;
     [SerializeField] private int maxInclusive_Z = 550;
     [SerializeField] private float height = 1.0f;
-    private void Start()
+    public void Init()
     {
         enemyParent = GameObject.Find("@EnemyParent");
         if(enemyParent == null)
             enemyParent = new GameObject("@EnemyParent");
-        coroutine = SpawnEnemy();
-        StartCoroutine(coroutine);
+
+        _enemyCoroutine = EnemySpawner();
+        StartCoroutine(_enemyCoroutine);
     }
 
-    private void Update()
+    //옮길 수 있을 것 같음
+    public void OnUpdate()
     {
         if(Input.GetKey(KeyCode.Space))
-            StopCoroutine(coroutine);
-        if (Input.GetKey(KeyCode.C))
-            enemyCount--;
-        if(enemyCount == 0)
-            GameManager.UI.ShowPopupUI<UI_GameClear>();
+            StopCoroutine(_enemyCoroutine);
+        //if (Input.GetKey(KeyCode.C))
+            //enemyCount--;
+        //if(enemyCount == 0)
+            //GameManager.UI.ShowPopupUI<UI_GameClear>();
     }
 
-    IEnumerator SpawnEnemy()
+    
+    public IEnumerator EnemySpawner()
     {
         while (true)
         {
-            Vector3 position = new Vector3(UnityEngine.Random.Range(minInclusive_X, maxInclusive_X),height,UnityEngine.Random.Range(minInclusive_Z, maxInclusive_Z));
-            GameObject obj = GameManager.Resources.Instantiate(path, position, enemyParent.transform);
-            enemyCount++;
-            Debug.Log("적이 생성되었습니다. ");
+            SpawnEnemy();
             yield return new WaitForSeconds(waitingTime);
         }
+    }
+    
+
+    private void SpawnEnemy()
+    {
+         Vector3 position = new Vector3(UnityEngine.Random.Range(minInclusive_X, maxInclusive_X),height,UnityEngine.Random.Range(minInclusive_Z, maxInclusive_Z));
+         GameObject obj = GameManager.Resources.Instantiate(path, position, enemyParent.transform);
+         Debug.Log("적이 생성되었습니다. ");
+         BossScene.IncEnemyCount();
     }
     
 }

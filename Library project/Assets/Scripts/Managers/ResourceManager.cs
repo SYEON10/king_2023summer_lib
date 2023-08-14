@@ -6,24 +6,37 @@ public class ResourceManager
 {
     public T Load<T>(string path) where T : Object
     {
+        if (typeof(T) == typeof(GameObject))
+        {
+            string name = path;
+            int index = name.LastIndexOf('/');
+            if (index >= 0)
+                name = name.Substring(index + 1);
+
+            GameObject go = GameManager.Pool.GetOriginal(name);
+            if (go != null)
+                return go as T;
+        }
+        
         return Resources.Load<T>(path);
     }
 
     public GameObject Instantiate(string path, Transform parent = null)
     {
-        GameObject prefab = Load<GameObject>($"Prefabs/{path}");
-        if (prefab == null)
+        GameObject original = Load<GameObject>($"Prefabs/{path}");
+        if(original == null)
         {
             Debug.Log($"Failed to load prefab : {path}");
             return null;
         }
 
-        GameObject go = Object.Instantiate(prefab, parent);
-        int index = go.name.IndexOf("(Clone)");
-        if (index > 0)
-            go.name = go.name.Substring(0, index);
+        if (original.GetComponent<Poolable>() != null)
+            return GameManager.Pool.Pop(original, parent).gameObject;
+        
+        GameObject obj = Object.Instantiate(original, parent);
+        obj.name = original.name;
 
-        return go;
+        return obj;
     }
 
     public GameObject Instantiate(string path, Vector3 position, Transform parent = null)
@@ -33,11 +46,19 @@ public class ResourceManager
         return obj;
     }
 
-    public void Destroy(GameObject go)
+    public void Destroy(GameObject go, float time = 0.0f)
     {
         if (go == null)
             return;
+        
+        //풀링이 필요하면 -> 풀링 매니저한테 던져주기
+        Poolable poolable = go.GetComponent<Poolable>();
+        if (poolable != null)
+        {
+            GameManager.Pool.Push(poolable);
+            return;
+        }
 
-        Object.Destroy(go);
+        Object.Destroy(go, time);
     }
 }
