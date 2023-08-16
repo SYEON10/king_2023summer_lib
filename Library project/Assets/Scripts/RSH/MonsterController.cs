@@ -1,26 +1,30 @@
 using System.Collections;
 using System.Collections.Generic;
+using DG.Tweening;
 using UnityEngine;
+using static Define;
 using UnityEngine.AI;
 
 public class MonsterController : BaseController
 {
-	Stat _stat;
-	[SerializeField] float _scanRange = 1000;
-	[SerializeField] float _attackRange = 2;
+	private GameObject player;
+	[SerializeField] float _scanRange = 100000;
+	[SerializeField] float _attackRange = 10f;
+	[SerializeField] private float _moveSpeed = 5f;
+
+	[SerializeField] private MonsterType _monsterType = MonsterType.Unknown;
+	[SerializeField] private AttackType _attackType = AttackType.Unkown;
+	[SerializeField] private GameObject _bulletPF;
+	[SerializeField] private bool isAttacking = false;
+	private float _skillCoolTime = 2.0f;
 
     public override void Init()
     {
-		WorldObjectType = Define.WorldObject.Monster;
-		_stat = gameObject.GetComponent<Stat>();
+		player = GameObject.FindWithTag("Player");
     }
 
 	protected override void UpdateIdle()
 	{
-		// Update 안에서 호출중인 메소드라 과부하가 너무큼 이부분은 나중에 플레이어 구현한 것 보고 수정해야됨
-		// GameObject player = Managers.Game.GetPlayer();
-		GameObject player = GameObject.FindWithTag("Player");
-		
 		if (player == null)
 			return;
 
@@ -41,26 +45,24 @@ public class MonsterController : BaseController
 			float distance = (_destPos - transform.position).magnitude;
 			if (distance <= _attackRange)
 			{
-				NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
-				nma.SetDestination(transform.position);
+				// TODO 
 				State = Define.State.Skill;
 				return;
 			}
 		}
-
 		// 이동
-		Vector3 dir = _destPos - transform.position;
-		if (dir.magnitude < 0.1f)
+		Vector3 moveDir = _destPos - transform.position;
+		transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(moveDir), 20 * Time.deltaTime);
+		
+		if (moveDir.magnitude < _moveSpeed * Time.deltaTime)
 		{
+			transform.position = _destPos;
 			State = Define.State.Idle;
 		}
 		else
 		{
-			NavMeshAgent nma = gameObject.GetOrAddComponent<NavMeshAgent>();
-			nma.SetDestination(_destPos);
-			nma.speed = _stat.MoveSpeed;
-
-			transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), 20 * Time.deltaTime);
+			transform.position += moveDir.normalized * _moveSpeed * Time.deltaTime;
+			State = Define.State.Moving;
 		}
 	}
 
@@ -71,29 +73,60 @@ public class MonsterController : BaseController
 			Vector3 dir = _lockTarget.transform.position - transform.position;
 			Quaternion quat = Quaternion.LookRotation(dir);
 			transform.rotation = Quaternion.Lerp(transform.rotation, quat, 20 * Time.deltaTime);
+
+			switch (_attackType)
+			{
+				case AttackType.Close:
+					CloseAttack();
+					break;
+				case AttackType.Far:
+					FarAttack(quat);
+					break;
+				default:
+					State = State.Idle;
+					break;
+			}
 		}
 	}
 
+	private void CloseAttack()
+	{
+		if (_attackType != AttackType.Close || isAttacking)
+			return;
+		
+		isAttacking = true;
+		transform.DOMove(_destPos, 1.0f);
+		StartCoroutine(WaitForCoolTime());
+	}
+
+	private void FarAttack(Quaternion attackDir)
+	{
+		if (_attackType != AttackType.Far || isAttacking)
+			return;
+		
+		// Bullet 생성
+		isAttacking = true;
+		Instantiate(_bulletPF, transform.position, attackDir);
+		StartCoroutine(WaitForCoolTime());
+	}
+
+	IEnumerator WaitForCoolTime()
+	{
+		yield return new WaitForSeconds(_skillCoolTime);
+		isAttacking = false;
+		State = State.Idle;
+	}
+	
+	// TODO
 	void OnHitEvent()
 	{
 		if (_lockTarget != null)
 		{
-			// 체력
-			Stat targetStat = _lockTarget.GetComponent<Stat>();
-			targetStat.OnAttacked(_stat);
-
-			if (targetStat.Hp > 0)
-			{
-				float distance = (_lockTarget.transform.position - transform.position).magnitude;
-				if (distance <= _attackRange)
-					State = Define.State.Skill;
-				else
-					State = Define.State.Moving;
-			}
-			else
-			{
-				State = Define.State.Idle;
-			}
+			float distance = (_lockTarget.transform.position - transform.position).magnitude;
+			if (distance <= _attackRange) 
+				State = Define.State.Skill;
+			else 
+				State = Define.State.Moving;
 		}
 		else
 		{

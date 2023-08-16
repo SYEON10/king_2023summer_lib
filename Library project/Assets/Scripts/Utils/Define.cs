@@ -5,11 +5,17 @@ using UnityEngine;
 
 public class Define
 {
-    public enum WorldObject
+    public enum MonsterType
     {
         Unknown,
-        Player,
-        Monster,
+        Flying,
+        Walking
+    }
+    public enum AttackType
+    {
+        Unkown,
+        Close,
+        Far
     }
     public enum State
     {
