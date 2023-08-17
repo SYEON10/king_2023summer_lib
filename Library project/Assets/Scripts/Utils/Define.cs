@@ -11,6 +11,7 @@ public class Define
         Lobby,
         Game,
         Boss,
+        Ending,
         Unknown,
     }
 

@@ -6,7 +6,9 @@ using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
-    public int EnemyCount;
+    public static int EnemyCount = 0;
+    public static bool PlayerAlive { private get; set; } = true;
+    
     #region Managers
     private static GameManager _instance;
     static GameManager GetGm
@@ -58,6 +60,18 @@ public class GameManager : MonoBehaviour
             }
             DontDestroyOnLoad(_obj);
             _instance = _obj.GetComponent<GameManager>();
+            
+            //기타 초기화
         }
     }
+
+    public static void GameOver()
+    {
+        /* 3인칭 카메라 사용 시 -> Player 사망
+        GameObject _player = GameObject.Find("Player");
+        GameManager.Resources.Destroy(_player);
+        */
+        UI.ShowPopupUI<UI_GameOver>();
+    }
+    
 }

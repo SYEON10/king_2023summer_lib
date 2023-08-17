@@ -45,7 +45,7 @@ public class BossPlayerController : MonoBehaviour
         {
             if (Math.Truncate(player.P_LeftCoolTime) > 0)
             {
-                
+                //플레이어사망
             }
             else
             {

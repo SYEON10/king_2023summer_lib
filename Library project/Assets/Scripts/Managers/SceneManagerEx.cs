@@ -21,4 +21,9 @@ public class SceneManagerEx
     {
         CurrentScene.Clear();
     }
+    public IEnumerator DelayLoadingScene(float delayTime)
+    {
+        yield return new WaitForSeconds(delayTime);
+        LoadScene(Define.Scene.Ending);
+    }
 }
