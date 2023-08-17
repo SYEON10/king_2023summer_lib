@@ -10,13 +10,15 @@ public class PlayerUltimate : MonoBehaviour
     bool canAttack = true;
     float CoolTime = 5f;
     float LeftCoolTime = 0f;
+
     float arcJumpCooldown = 2f;
-    float arcJumpDuration = 1.5f; // Arc jump duration (1.5 seconds)
-    float arcJumpTimer = 0f; // Timer for arc jump cooldown
-    float arcJumpHeight = 5f; // Arc jump height
+    float arcJumpDuration = 1.5f; 
+    float arcJumpTimer = 0f; 
+    float arcJumpHeight = 5f; 
     bool isArcJumping = false;
+
     Vector3 arcJumpTarget;
-    int ultimateCharges = 3; // Initial ultimate charges
+    int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
 
     public float P_LeftCoolTime { get { return LeftCoolTime; } }
 
