@@ -437,6 +437,7 @@ GameObject:
   - component: {fileID: 5554749050266512967}
   - component: {fileID: 7824324735166883532}
   - component: {fileID: 4530745030999845247}
+  - component: {fileID: 3519467759515092310}
   - component: {fileID: 828965455058729759}
   m_Layer: 0
   m_Name: PotatoChip
@@ -508,6 +509,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 723337e7a29cbb94fb067d9c4f8d4d1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!122 &3519467759515092310
+Halo:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5978465030543246519}
+  m_Enabled: 1
+  m_Color:
+    serializedVersion: 2
+    rgba: 4286611584
+  m_Size: 5
 --- !u!136 &828965455058729759
 CapsuleCollider:
   m_ObjectHideFlags: 0
