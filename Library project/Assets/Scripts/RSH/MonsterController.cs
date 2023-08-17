@@ -119,22 +119,6 @@ public class MonsterController : BaseController
 	}
 	
 	// TODO
-	void OnHitEvent()
-	{
-		if (_lockTarget != null)
-		{
-			float distance = (_lockTarget.transform.position - transform.position).magnitude;
-			if (distance <= _attackRange) 
-				State = Define.State.Skill;
-			else 
-				State = Define.State.Moving;
-		}
-		else
-		{
-			State = Define.State.Idle;
-		}
-	}
-
 	private void OnCollisionEnter(Collision other)
 	{
 		if (other.gameObject.CompareTag("Player"))
