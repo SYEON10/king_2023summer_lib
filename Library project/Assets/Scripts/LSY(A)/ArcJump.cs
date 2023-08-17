@@ -2,33 +2,33 @@ using UnityEngine;
 
 public class ArcJump : MonoBehaviour
 {
-    Vector3 target; 
-    bool isJumping = false; 
+    Vector3 target;
+    bool isJumping = false;
     float jumpHeight = 3f; // 점프 최대 높이
     float jumpDuration = 1.5f; // 점프 전체 시간
     float jumpTimer = 0f; // 점프 시작 후 지난 시간
     Vector3 initialPosition; // 점프 시작된 위치 
 
-    void Update() 
+    void Update()
     {
         if (Input.GetMouseButtonDown(0))
         {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             Plane plane = new Plane(Vector3.up, transform.position);
-            float distanceToPlane; 
+            float distanceToPlane;
 
             if (plane.Raycast(ray, out distanceToPlane))
             {
                 target = ray.GetPoint(distanceToPlane); // distanceToPlane: 교차점의 위치
-                isJumping = true; 
+                isJumping = true;
                 initialPosition = transform.position; // 현재 위치 저장 
-                jumpTimer = 0f; 
+                jumpTimer = 0f;
             }
         }
 
         if (isJumping)
         {
-            jumpTimer += Time.deltaTime; 
+            jumpTimer += Time.deltaTime;
 
             if (jumpTimer <= jumpDuration)
             {
