@@ -34,7 +34,7 @@ public class PlayerAttack : MonoBehaviour
         HandleAttack();
         HandleArcJump();
 
-        if (Input.GetKeyDown(KeyCode.Q) && ultimateCharges > 0)
+        if (Input.GetKeyDown(KeyCode.Q) && ultimateCharges>0)
         {
             UseUltimate();
         }
@@ -101,11 +101,12 @@ public class PlayerAttack : MonoBehaviour
             arcJumpTimer -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && arcJumpTimer <= 0f)
+        if (Input.GetKeyDown(KeyCode.Q) && arcJumpTimer <= 0f && ultimateCharges > 0) 
         {
             arcJumpTimer = arcJumpCooldown;
             isArcJumping = true;
             arcJumpTarget = GetMouseClickPosition();
+
         }
 
         if (isArcJumping)
@@ -140,12 +141,11 @@ public class PlayerAttack : MonoBehaviour
             transform.position = Vector3.Slerp(initialPosition, arcJumpTarget, normalizedTime) + yOffset * Vector3.up;
             timer += Time.deltaTime;
         }
-
         isArcJumping = false;
     }
 
     void UseUltimate()
-    {
+    { 
         ultimateCharges--;
         Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // ±Ã±Ø±â »ç¿ë ÈÄ ³²Àº È½¼ö Ç¥½Ã
         arcJumpTimer = arcJumpCooldown;
