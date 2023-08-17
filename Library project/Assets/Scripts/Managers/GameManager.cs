@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
 {
     public static int EnemyCount = 0;
     public static bool PlayerAlive { private get; set; } = true;
+    public static bool BossAlive { private get; set; } = true;
+
     
     #region Managers
     private static GameManager _instance;
@@ -27,7 +29,7 @@ public class GameManager : MonoBehaviour
     private SceneManagerEx _scene = new SceneManagerEx();
     private PoolManager _pool = new PoolManager();
     
-    public static InputManager Input { get { return _instance._input; } }
+    public static InputManager Input { get { Init();return _instance._input; } }
     public static ResourceManager Resources { get { return _instance._resource; } }
     public static UIManager UI { get { return _instance._ui; } }
     public static DataManager Data { get { return _instance._data; } }
@@ -62,6 +64,7 @@ public class GameManager : MonoBehaviour
             _instance = _obj.GetComponent<GameManager>();
             
             //기타 초기화
+            _instance._pool.Init();
         }
     }
 
@@ -71,7 +74,11 @@ public class GameManager : MonoBehaviour
         GameObject _player = GameObject.Find("Player");
         GameManager.Resources.Destroy(_player);
         */
+        if (PlayerAlive == false || BossAlive == false)
+            return;
+
         UI.ShowPopupUI<UI_GameOver>();
+        Scene.Clear();
     }
     
 }

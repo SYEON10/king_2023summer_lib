@@ -6,6 +6,20 @@ using UnityEngine;
 
 public class Util
 {
+    public static string GetNameFromPath(string path)
+    {
+        int index = path.LastIndexOf('/');
+        if (index >= 0)
+            return path.Substring(index + 1);
+        return path;
+    }
+    public static GameObject GetOrCreateObject(string name = null)
+    {
+        GameObject temp = GameObject.Find(name);
+        if(temp == null)
+            temp = new GameObject(name);
+        return temp;
+    }
     public static T GetOrAddComponent<T>(GameObject obj) where T : UnityEngine.Component
     {
         T component = obj.GetComponent<T>();

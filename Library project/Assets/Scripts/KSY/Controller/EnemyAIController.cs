@@ -5,25 +5,41 @@ using UnityEngine;
 
 public class EnemyAIController : MonoBehaviour
 {
-    class SpawnPoint
+    public class Spawn
     {
+        #region private
         private float _waitingTime = 3.0f;
-        private int _minInclusive_X = 450;
-        private int _maxInclusive_X = 550;
-        private int _minInclusive_Z = 450;
-        private int _maxInclusive_Z = 550;
-        private float _height = 1.0f;
+        private float _height = 1.5f;
+        private float _minInclusiveX = 450;
+        private float _maxInclusiveX = 550;
+        private float _minInclusiveZ = 450;
+        private float _maxInclusiveZ = 550;
         
         private GameObject _enemyParent = null;
 
-        private string _path;
-        
+        private string _enemyPath;
+
         private void CreateEnemy()
         {
-            Vector3 position = new Vector3(UnityEngine.Random.Range(_minInclusive_X, _maxInclusive_X),_height,UnityEngine.Random.Range(_minInclusive_Z, _maxInclusive_Z));
-            GameObject obj = GameManager.Resources.Instantiate(_path, position, _enemyParent.transform);
+            Vector3 position = new Vector3(UnityEngine.Random.Range(_minInclusiveX, _maxInclusiveX),_height,UnityEngine.Random.Range(_minInclusiveZ, _maxInclusiveZ));
+            GameObject obj = GameManager.Resources.Instantiate(_enemyPath, position, _enemyParent.transform);
             Debug.Log("적이 생성되었습니다. ");
             GameManager.EnemyCount++;
+        }
+        
+        #endregion
+        public Spawn(string enemyPath, float minIncX, float maxIncX, float minIncZ, float maxIncZ, float waitingTime = 3.0f, float height = 1.5f)
+        {
+            _enemyPath = enemyPath;
+            _height = height; 
+            _minInclusiveX = minIncX;
+            _maxInclusiveX = maxIncX;
+            _minInclusiveZ = minIncZ;
+            _maxInclusiveZ = maxIncZ;
+            _waitingTime = waitingTime;
+
+            _enemyParent = Util.GetOrCreateObject($"@EnemyParent_{Util.GetNameFromPath(enemyPath)}_({(minIncX + maxIncX) / 2} : {(minIncZ + maxIncZ) / 2})");
+            CreateEnemy();
         }
         
         //1. 적을 일정 시간동안 스폰 -> Stop
@@ -39,33 +55,35 @@ public class EnemyAIController : MonoBehaviour
         }
     }
     
-    private IEnumerator _enemyCoroutine = null;
-
-    [SerializeField] private float spawningTime = 100.0f;
+    private List<Coroutine> _enemyCoroutine = new List<Coroutine>();
+    private List<Spawn> Spawners = new List<Spawn>();
     
-    private string path = "EnemyEX";
+    private string _enemyPath = "Characters/EnemyEX";
     
     public void Init()
     {
-        enemyParent = GameObject.Find("@EnemyParent");
-        if(enemyParent == null)
-            enemyParent = new GameObject("@EnemyParent");
+        _enemyPath = "Characters/EnemyEX";
+        Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, -38.0f, -35.0f));
+        Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, -38.0f, -35.0f));
+        Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, 35.0f, 38.0f));
+        Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, 35.0f, 38.0f));
 
-        _enemyCoroutine = EnemySpawner();
-        StartCoroutine(_enemyCoroutine);
+        for (int i = 0; i < 4; i++)
+        {
+            _enemyCoroutine.Add(StartCoroutine(Spawners[i].EnemySpawner()));
+        }
+    }
+
+    public void StopSpawning()
+    {
+        for (int i = 0; i < _enemyCoroutine.Count; i++)
+            StopCoroutine(Spawners[i].EnemySpawner());
+        _enemyCoroutine.Clear();
     }
 
     //옮길 수 있을 것 같음
     public void OnUpdate()
     {
-        if(Input.GetKey(KeyCode.Space))
-            StopCoroutine(_enemyCoroutine);
-        //if (Input.GetKey(KeyCode.C))
-            //enemyCount--;
-        //if(enemyCount == 0)
-            //GameManager.UI.ShowPopupUI<UI_GameClear>();
+        
     }
-
-    
-    
 }

@@ -8,7 +8,9 @@ public class BossController : MonoBehaviour
     {
         if (other.name != "Player")
         {
-            //GameOver();
+            
+            GameManager.GameOver();
+            GameManager.BossAlive = false;
         }
     }
 }
