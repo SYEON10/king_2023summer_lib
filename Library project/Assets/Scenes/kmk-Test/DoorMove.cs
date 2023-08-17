@@ -8,6 +8,8 @@ public class DoorMove : MonoBehaviour
     public Transform door2Transform;
     public float slideDistance = 5.0f;
     public float slideSpeed = 2.0f;
+    public AudioSource audioSource;
+    public AudioClip audioClip;
 
     private Vector3 initial1Position;
     private Vector3 initial2Position;
@@ -21,6 +23,10 @@ public class DoorMove : MonoBehaviour
         initial2Position = door2Transform.position; 
         target1Position = initial1Position + Vector3.left * slideDistance;
         target2Position = initial2Position + Vector3.right * slideDistance;
+
+        audioSource = GetComponent<AudioSource>();
+        audioSource.clip = audioClip;
+        audioSource.playOnAwake = false;
     }
 
     private void Update()
@@ -39,14 +45,16 @@ public class DoorMove : MonoBehaviour
                 if (hit.collider.gameObject.name == "Up Button" || hit.collider.gameObject.name == "Down Button")
                 {
                     ToggleDoor();
+                    
                 }
             }
         }
     }
-
+    
     private void ToggleDoor()
     {
         isDoorOpen = !isDoorOpen;
+        audioSource.Play();
     }
 
     private void FixedUpdate()
@@ -56,6 +64,7 @@ public class DoorMove : MonoBehaviour
         Vector3 target1 = isDoorOpen ? target1Position : initial1Position;
         door1Transform.position = Vector3.MoveTowards(door1Transform.position, target1, slideSpeed * Time.fixedDeltaTime);
         door2Transform.position = Vector3.MoveTowards(door2Transform.position, target2, slideSpeed * Time.fixedDeltaTime);
+
     }
 }
 
