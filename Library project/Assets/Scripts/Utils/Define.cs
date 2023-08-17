@@ -5,7 +5,25 @@ using UnityEngine;
 
 public class Define
 {
-
+    public enum MonsterType
+    {
+        Unknown,
+        Flying,
+        Walking
+    }
+    public enum AttackType
+    {
+        Unkown,
+        Close,
+        Far
+    }
+    public enum State
+    {
+        Die,
+        Moving,
+        Idle,
+        Skill,
+    }
     public enum Scene
     {
         Lobby,
