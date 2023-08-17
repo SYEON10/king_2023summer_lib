@@ -121,4 +121,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _bulletSpeed: 20
-  _moveDir: {x: 0, y: 0, z: 0}
