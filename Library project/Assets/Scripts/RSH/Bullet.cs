@@ -19,8 +19,7 @@ public class Bullet : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
         
-        // TODO
-        // 게임오버처리
+        other.gameObject.GetComponent<PlayerAttack>().PlayerDead();
     }
 
     IEnumerator DestroySelf()
