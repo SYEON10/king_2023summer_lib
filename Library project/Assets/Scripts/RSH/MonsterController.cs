@@ -127,10 +127,18 @@ public class MonsterController : BaseController
 	// TODO
 	private void OnCollisionEnter(Collision other)
 	{
-		if (other.gameObject.CompareTag("Player"))
+		if (!other.gameObject == player)
 		{
-			// 근접공격 등으로 플레이어와 닿았을때 플레이어 Die 처리
-			
+			return;
+		}
+
+		if (true)
+		{
+			MonsterDie();
+		}
+		else
+		{
+			//PlayerDie
 		}
 	}
 
@@ -139,7 +147,12 @@ public class MonsterController : BaseController
 		// 플레이어 총알 맞았을 때 Die 처리
 		if (other.CompareTag("PlayerBullet"))
 		{
-			
+			MonsterDie();
 		}
+	}
+
+	public void MonsterDie()
+	{
+		Destroy(gameObject);
 	}
 }
