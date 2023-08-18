@@ -34,7 +34,10 @@ public abstract class UI_Base : MonoBehaviour
     {
         UnityEngine.Object[] objects = null;
         if (_objects.TryGetValue(typeof(T), out objects) == false)
+        {
+            Debug.Log("@ERROR@UI를 가져오는 것을 실패했습니다.");
             return null;
+        }
 
         return objects[index] as T;
     }
@@ -44,9 +47,9 @@ public abstract class UI_Base : MonoBehaviour
         return Get<TextMeshProUGUI>(index);
     }
     
-    protected Button GetButton(int index)
+    protected UnityEngine.UI.Button GetButton(int index)
     {
-        return Get<Button>(index);
+        return Get<UnityEngine.UI.Button>(index);
     }
     
     protected Image GetImage(int index)

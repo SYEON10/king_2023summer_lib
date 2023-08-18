@@ -23,7 +23,7 @@ public class EnemyAIController : MonoBehaviour
         {
             Vector3 position = new Vector3(UnityEngine.Random.Range(_minInclusiveX, _maxInclusiveX),_height,UnityEngine.Random.Range(_minInclusiveZ, _maxInclusiveZ));
             GameObject obj = GameManager.Resources.Instantiate(_enemyPath, position, _enemyParent.transform);
-            Debug.Log("적이 생성되었습니다. ");
+            //Debug.Log("적이 생성되었습니다. ");
             GameManager.EnemyCount++;
         }
         
@@ -63,12 +63,12 @@ public class EnemyAIController : MonoBehaviour
     public void Init()
     {
         _enemyPath = "Characters/EnemyEX";
-        Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, -38.0f, -35.0f));
-        Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, -38.0f, -35.0f));
+        //Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, -38.0f, -35.0f));
+        //Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, -38.0f, -35.0f));
         Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, 35.0f, 38.0f));
         Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, 35.0f, 38.0f));
 
-        for (int i = 0; i < 4; i++)
+        for (int i = 0; i < Spawners.Count; i++)
         {
             _enemyCoroutine.Add(StartCoroutine(Spawners[i].EnemySpawner()));
         }

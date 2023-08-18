@@ -63,6 +63,8 @@ public class Util
                     return component; 
             }
         }
+        
+        Debug.Log("@ERROR Child를 발견하지 못했습니다. ");
 
         return null;
     }

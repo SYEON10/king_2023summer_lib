@@ -26,7 +26,7 @@ public class BossScene : BaseScene
 
         GameManager.EnemyCount = 0;
         
-        _player = GameObject.Find("Player").GetOrAddComponent<BossPlayerController>();
+        _player = GameObject.FindGameObjectWithTag("Player").GetOrAddComponent<BossPlayerController>();
         if(_player == null)
             GameManager.Resources.Instantiate("Characters/Player").GetOrAddComponent<BossPlayerController>();
         _boss = GameManager.Resources.Instantiate("Characters/Kazuha").GetOrAddComponent<BossController>();
