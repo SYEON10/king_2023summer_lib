@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using UnityEngine;
 
 public class CamControl : MonoBehaviour
@@ -7,7 +8,10 @@ public class CamControl : MonoBehaviour
     public GameObject player; //따라다닐 오브젝트 지정 
     public float xmove = 0; //x 누적 움직인 양
     public float ymove = 0; //y 누적 움직인 
-   
+
+    public Transform target;
+    public Vector3 offset;
+
     public float SmoothTime = 0.2f;
     private Vector3 velocity = Vector3.zero;
     private int toggleView = 3; //현재 1인칭인지, 3인칭인지 판단. 처음에는 3인칭 
@@ -31,8 +35,11 @@ public class CamControl : MonoBehaviour
         }
         else if (toggleView == 3)
         {
-            Vector3 reverseDistance = new Vector3(0.0f, -4.0f, 20.0f);
-            transform.position = player.transform.position - transform.rotation * reverseDistance;
+
+            Vector3 reverseDistance1 = new Vector3(0.0f, 6.0f, -20.0f);
+            transform.position = player.transform.position + transform.rotation * reverseDistance1;
+
         }
+
     }
 }
