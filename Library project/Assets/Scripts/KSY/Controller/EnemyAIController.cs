@@ -85,8 +85,8 @@ public class EnemyAIController : MonoBehaviour
 
     private void SpawnInBoss()
     {
-        Spawners.Add(new Spawn(_walkingEnemyPath[0], -38.0f, -35.0f, 35.0f, 38.0f));
-        Spawners.Add(new Spawn(_walkingEnemyPath[0], 35.0f, 38.0f, 35.0f, 38.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], -38.0f, -33.0f, 33.0f, 38.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], 33.0f, 38.0f, 33.0f, 38.0f));
     }
 
     public void StopSpawning()

@@ -69,6 +69,7 @@ public class GameManager : MonoBehaviour
             
             //기타 초기화
             _instance._pool.Init();
+            _instance._sound.Init();
         }
     }
 

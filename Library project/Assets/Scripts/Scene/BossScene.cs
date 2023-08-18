@@ -9,9 +9,7 @@ public class BossScene : BaseScene
     private BossPlayerController _player;
     private BossController _boss;
     private EnemyAIController _enemy;
-
-    private string _bgm = "BossBGM";
-
+    
     private void Start()
     {
         Init();
@@ -21,7 +19,7 @@ public class BossScene : BaseScene
     {
         base.Init();
         
-        GameManager.Sound.Play(_bgm, Define.Sound.Bgm);
+        GameManager.Sound.Play("BossBGM", Define.Sound.Bgm);
 
         SceneType = Define.Scene.Boss;
         
