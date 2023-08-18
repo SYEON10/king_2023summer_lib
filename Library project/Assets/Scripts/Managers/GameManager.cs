@@ -6,9 +6,14 @@ using UnityEngine.PlayerLoop;
 
 public class GameManager : MonoBehaviour
 {
-    private static GameManager _instance;
+    public static int EnemyCount = 0;
+    public static bool PlayerAlive { private get; set; } = true;
+    public static bool BossAlive { private get; set; } = true;
 
-    static GameManager GetGM
+    
+    #region Managers
+    private static GameManager _instance;
+    static GameManager GetGm
     {
         get
         {
@@ -18,43 +23,20 @@ public class GameManager : MonoBehaviour
     }
 
     private InputManager _input = new InputManager();
-
-    public static InputManager Input
-    {
-        get
-        {
-            return GetGM._input;
-        }
-    }
-
     private ResourceManager _resource = new ResourceManager();
-
-    public static ResourceManager Resources
-    {
-        get
-        {
-            return _instance._resource;
-        }
-    }
-    
     private UIManager _ui = new UIManager();
-    public static UIManager UI
-    {
-        get
-        {
-            return _instance._ui;
-        }
-    }
-
     private DataManager _data = new DataManager();
-
-    public static DataManager Data
-    {
-        get
-        {
-            return _instance._data;
-        }
-    }
+    private SceneManagerEx _scene = new SceneManagerEx();
+    private PoolManager _pool = new PoolManager();
+    
+    public static InputManager Input { get { Init();return _instance._input; } }
+    public static ResourceManager Resources { get { return _instance._resource; } }
+    public static UIManager UI { get { Init();return _instance._ui; } }
+    public static DataManager Data { get { return _instance._data; } }
+    public static SceneManagerEx Scene { get { return _instance._scene; } }
+    public static PoolManager Pool  { get { return _instance._pool; } }
+    
+    #endregion
 
     void Start()
     {
@@ -80,6 +62,23 @@ public class GameManager : MonoBehaviour
             }
             DontDestroyOnLoad(_obj);
             _instance = _obj.GetComponent<GameManager>();
+            
+            //기타 초기화
+            _instance._pool.Init();
         }
     }
+
+    public static void GameOver()
+    {
+        /* 3인칭 카메라 사용 시 -> Player 사망
+        GameObject _player = GameObject.Find("Player");
+        GameManager.Resources.Destroy(_player);
+        */
+        if (PlayerAlive == false || BossAlive == false)
+            return;
+
+        UI.ShowPopupUI<UI_GameOver>();
+        Scene.Clear();
+    }
+    
 }

@@ -9,7 +9,8 @@ public class UI_GameOver :UI_Popup
 {
     enum Btns
     {
-        Btn_Retry
+        Btn_Retry,
+        
     }
     
     enum Texts
@@ -29,7 +30,7 @@ public class UI_GameOver :UI_Popup
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<Button>(typeof(Btns));
 
-        GameObject btn = GetButton((int)Btns.Btn_Retry).gameObject;
-        BindUIEvent(btn, (PointerEventData data) => {GameManager.UI.ClosePopupUI();});
+        //GameObject btn = GetButton((int)Btns.Btn_Retry).gameObject;
+        //BindUIEvent(btn, (PointerEventData data) => {GameManager.UI.ClosePopupUI();});
     }
 }

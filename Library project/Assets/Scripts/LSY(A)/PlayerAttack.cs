@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
@@ -20,7 +21,8 @@ public class PlayerAttack : MonoBehaviour
     bool isArcJumping = false;
 
     Vector3 arcJumpTarget;
-    int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
+    public int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
+    //public Text Count; 
 
     void Start()
     {
