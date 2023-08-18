@@ -132,13 +132,14 @@ public class MonsterController : BaseController
 			return;
 		}
 
-		if (true)
+		PlayerAttack playerAttack = player.GetComponent<PlayerAttack>();
+		if (playerAttack.canAttack)
 		{
 			MonsterDie();
 		}
 		else
 		{
-			//PlayerDie
+			playerAttack.PlayerDead();
 		}
 	}
 
