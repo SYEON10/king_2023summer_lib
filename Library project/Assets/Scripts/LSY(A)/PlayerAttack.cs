@@ -157,8 +157,9 @@ public class PlayerAttack : MonoBehaviour
 
     public void PlayerDead()
     {
-
+        GameManager.GameOver();
     }
+    
     IEnumerator AttackEnemy(GameObject enemy)
     {
         canAttack = false;
