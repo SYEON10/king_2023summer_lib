@@ -12,7 +12,7 @@ public class BossPlayerController : MonoBehaviour
     
     void Start()
     {
-        player = GameObject.Find("Player").GetOrAddComponent<PlayerAttack>();
+        player = GameObject.FindGameObjectWithTag("Player").GetOrAddComponent<PlayerAttack>();
     }
 
     void Update()
@@ -43,7 +43,7 @@ public class BossPlayerController : MonoBehaviour
     {
         if (other.name != "Kazuha")
         {
-            if (Math.Truncate(player.P_LeftCoolTime) > 0)
+            if (!player.canAttack)
             {
                 GameManager.GameOver();
                 GameManager.PlayerAlive = false;

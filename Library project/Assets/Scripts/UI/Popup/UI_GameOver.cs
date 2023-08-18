@@ -9,7 +9,7 @@ public class UI_GameOver :UI_Popup
 {
     enum Btns
     {
-        Btn_Retry,
+        Button_Retry,
     }
     
     enum Texts
@@ -27,9 +27,10 @@ public class UI_GameOver :UI_Popup
     {
         base.Init();
         Bind<TextMeshProUGUI>(typeof(Texts));
-        Bind<Button>(typeof(Btns));
+        Bind<UnityEngine.UI.Button>(typeof(Btns));
 
-        GameObject btn = GetButton((int)Btns.Btn_Retry).gameObject;
+
+        GameObject btn = GetButton((int)Btns.Button_Retry).gameObject;
         BindUIEvent(btn, (PointerEventData data) => {Retry();});
     }
 
