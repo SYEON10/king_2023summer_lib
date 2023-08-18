@@ -58,11 +58,11 @@ public class EnemyAIController : MonoBehaviour
     private List<Coroutine> _enemyCoroutine = new List<Coroutine>();
     private List<Spawn> Spawners = new List<Spawn>();
     
-    private string _enemyPath = "Characters/EnemyEX";
+    private string _enemyPath = "MonsterPF/FlyingMonster_Close";
     
     public void Init()
     {
-        _enemyPath = "Characters/EnemyEX";
+        _enemyPath = "MonsterPF/FlyingMonster_Close";
         //Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, -38.0f, -35.0f));
         //Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, -38.0f, -35.0f));
         Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, 35.0f, 38.0f));
