@@ -13,6 +13,7 @@ public class Shoot : MonoBehaviour
 
 
 
+
     void Start()
     {
 
@@ -48,7 +49,8 @@ public class Shoot : MonoBehaviour
  
             bullet.GetComponent<Rigidbody>().AddForce(bulletDirection * bulletSpeed, ForceMode.Impulse);
 
-            Destroy(bullet, bulletLifetime);
+    
         }
+        Destroy(bullet, bulletLifetime);
     }
 }
