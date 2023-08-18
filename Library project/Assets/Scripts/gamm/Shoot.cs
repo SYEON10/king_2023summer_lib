@@ -9,7 +9,8 @@ public class Shoot : MonoBehaviour
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 50.0f; 
-    public float bulletLifetime = 1.0f; 
+    public float bulletLifetime = 1.0f;
+    private int toggleView = 3;
 
 
 
@@ -22,13 +23,17 @@ public class Shoot : MonoBehaviour
     void Update()
     {
 
+        if (Input.GetMouseButtonDown(2)) //휠클릭, 1/3인칭 시점 전환
+            toggleView = 4 - toggleView; //1>3 클릭때마다 변함 
 
-        
-        if (Input.GetMouseButtonDown(0)) 
+
+        if (toggleView == 1)
         {
-            ShootBullet();
+            if (Input.GetMouseButtonDown(0))
+            {
+                ShootBullet();
+            }
         }
-
     }
 
     void ShootBullet()
