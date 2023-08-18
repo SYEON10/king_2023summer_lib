@@ -39,6 +39,7 @@ public class BossScene : BaseScene
     public void OnUpdate()
     {
         _enemy.OnUpdate();
+        GameManager.Scene.LoadScene(Define.Scene.);
     }
 
     public void GameClear()

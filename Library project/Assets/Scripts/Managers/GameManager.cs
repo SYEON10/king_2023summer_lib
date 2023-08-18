@@ -28,13 +28,17 @@ public class GameManager : MonoBehaviour
     private DataManager _data = new DataManager();
     private SceneManagerEx _scene = new SceneManagerEx();
     private PoolManager _pool = new PoolManager();
-    
+    private SoundManager _sound = new SoundManager();
+
+
     public static InputManager Input { get { Init();return _instance._input; } }
     public static ResourceManager Resources { get { return _instance._resource; } }
     public static UIManager UI { get { Init();return _instance._ui; } }
     public static DataManager Data { get { return _instance._data; } }
     public static SceneManagerEx Scene { get { return _instance._scene; } }
     public static PoolManager Pool  { get { return _instance._pool; } }
+    public static SoundManager Sound  { get { return _instance._sound; } }
+
     
     #endregion
 

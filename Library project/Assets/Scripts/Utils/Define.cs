@@ -6,6 +6,13 @@ using UnityEngine;
 public class Define
 {
 
+    public enum Sound
+    {
+        Bgm,
+        Effect,
+        MaxCount,
+    }
+
     public enum MonsterType 
     { 
         Unknown, 
@@ -28,7 +35,7 @@ public class Define
 
     public enum Scene
     {
-        Lobby,
+        Main,
         Game,
         Boss,
         Ending,
