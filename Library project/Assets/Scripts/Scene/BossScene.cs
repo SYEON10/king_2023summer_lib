@@ -10,6 +10,8 @@ public class BossScene : BaseScene
     private BossController _boss;
     private EnemyAIController _enemy;
 
+    private string _bgm = "BossBGM";
+
     private void Start()
     {
         Init();
@@ -18,6 +20,8 @@ public class BossScene : BaseScene
     protected override void Init()
     {
         base.Init();
+        
+        GameManager.Sound.Play(_bgm, Define.Sound.Bgm);
 
         SceneType = Define.Scene.Boss;
         
@@ -39,7 +43,6 @@ public class BossScene : BaseScene
     public void OnUpdate()
     {
         _enemy.OnUpdate();
-        GameManager.Scene.LoadScene(Define.Scene.);
     }
 
     public void GameClear()

@@ -57,21 +57,36 @@ public class EnemyAIController : MonoBehaviour
     
     private List<Coroutine> _enemyCoroutine = new List<Coroutine>();
     private List<Spawn> Spawners = new List<Spawn>();
-    
-    private string _enemyPath = "MonsterPF/FlyingMonster_Close";
+
+    private string[] _flyingEnemyPath =
+    {
+        "MonsterPF/FlyingMonster_Close",
+        "MonsterPF/FlyingMonster_Far"
+    };
+
+    private string[] _walkingEnemyPath =
+    {
+        "MonsterPF/WalkingMonster_Close",
+        "MonsterPF/WalkingMonster_Far"
+    };
     
     public void Init()
     {
-        _enemyPath = "MonsterPF/FlyingMonster_Close";
-        //Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, -38.0f, -35.0f));
-        //Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, -38.0f, -35.0f));
-        Spawners.Add(new Spawn(_enemyPath, -38.0f, -35.0f, 35.0f, 38.0f));
-        Spawners.Add(new Spawn(_enemyPath, 35.0f, 38.0f, 35.0f, 38.0f));
+        if (GameManager.Scene.CurrentScene.SceneType == Define.Scene.Game) { SpawnInGame(); }
+        else if (GameManager.Scene.CurrentScene.SceneType == Define.Scene.Boss) { SpawnInBoss(); }
 
-        for (int i = 0; i < Spawners.Count; i++)
-        {
-            _enemyCoroutine.Add(StartCoroutine(Spawners[i].EnemySpawner()));
-        }
+        for (int i = 0; i < Spawners.Count; i++) { _enemyCoroutine.Add(StartCoroutine(Spawners[i].EnemySpawner())); }
+    }
+
+    private void SpawnInGame()
+    {
+        
+    }
+
+    private void SpawnInBoss()
+    {
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], -38.0f, -35.0f, 35.0f, 38.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], 35.0f, 38.0f, 35.0f, 38.0f));
     }
 
     public void StopSpawning()
