@@ -21,8 +21,8 @@ public class PlayerAttack : MonoBehaviour
     bool isArcJumping = false;
 
     Vector3 arcJumpTarget;
-    int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
-    public Text Count; 
+    public int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
+    //public Text Count; 
 
     void Start()
     {

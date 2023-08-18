@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
     
     public static InputManager Input { get { Init();return _instance._input; } }
     public static ResourceManager Resources { get { return _instance._resource; } }
-    public static UIManager UI { get { return _instance._ui; } }
+    public static UIManager UI { get { Init();return _instance._ui; } }
     public static DataManager Data { get { return _instance._data; } }
     public static SceneManagerEx Scene { get { return _instance._scene; } }
     public static PoolManager Pool  { get { return _instance._pool; } }
