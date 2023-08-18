@@ -15,7 +15,7 @@ public class UI_Boss : UI_Scene
         Text_CoolCount,
         Text_UltimateCount
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         Init();
