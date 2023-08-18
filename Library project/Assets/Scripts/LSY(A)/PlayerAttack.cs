@@ -155,6 +155,10 @@ public class PlayerAttack : MonoBehaviour
         arcJumpTarget = GetMouseClickPosition();
     }
 
+    public void PlayerDead()
+    {
+
+    }
     IEnumerator AttackEnemy(GameObject enemy)
     {
         canAttack = false;
