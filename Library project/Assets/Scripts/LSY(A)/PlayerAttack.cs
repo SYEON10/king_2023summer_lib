@@ -6,92 +6,76 @@ public class PlayerAttack : MonoBehaviour
 {
     Rigidbody rb;
     float _speed = 10f;
-    float distanceThreshold = 5f; // 플레이어의 적 공격 가능 범위거리
     bool canAttack = true;
     float CoolTime = 5f; // 재공격 가능할 때까지의 시간 
     float LeftCoolTime = 0f; // 쿨타임 끝나기까지 남은 시간
 
-    public float P_LeftCoolTime{ get { return LeftCoolTime; } }
+    [SerializeField] GameObject particles;
+    public float P_LeftCoolTime { get { return LeftCoolTime; } }
+
+    float arcJumpCooldown = 2f;
+    float arcJumpDuration = 1.5f;
+    float arcJumpTimer = 0f;
+    float arcJumpHeight = 5f;
+    bool isArcJumping = false;
+
+    Vector3 arcJumpTarget;
+    int ultimateCharges = 3; // 궁극기 횟수 
 
     void Start()
     {
-        rb = gameObject.GetComponent<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        particles.gameObject.SetActive(false); // 초기에 파티클은 비활성화
     }
+
     void Update()
     {
-        if (Input.GetKey(KeyCode.W))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), 0.4f);
-            transform.position += Vector3.forward * Time.deltaTime * _speed;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), 0.4f);
-            transform.position += Vector3.back * Time.deltaTime * _speed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), 0.4f);
-            transform.position += Vector3.left * Time.deltaTime * _speed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), 0.4f);
-            transform.position += Vector3.right * Time.deltaTime * _speed;
-        }
+        MovePlayer();
+        HandleAttack();
+        HandleArcJump();
 
-        if (canAttack)
+        if (Input.GetKeyDown(KeyCode.Q) && ultimateCharges>0)
         {
-            Attack();
+            UseUltimate();
         }
-        // 공격 후 쿨타임동안 재공격 불가능 
-        else
-        {
-            if (LeftCoolTime > 0f) // 쿨타임 이내 
-            {
-                LeftCoolTime -= Time.deltaTime;
-                Debug.Log("Cooldown: " + Mathf.Round(LeftCoolTime) + " seconds left.");
-            }
-            else // 쿨타임 종료 
-            {
-                canAttack = true;
-                LeftCoolTime = 0f;
-            }
-        }
-
     }
-    /*
-    void FixedUpdate()
+
+    void MovePlayer()
     {
-        // 이동 
-        if (Input.GetKey(KeyCode.A))
-        {
-            rb.AddForce(Vector3.left * power);
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            rb.AddForce(Vector3.right * power);
-        }
+        Vector3 moveDirection = Vector3.zero;
+
         if (Input.GetKey(KeyCode.W))
         {
-            rb.AddForce(Vector3.forward * power);
+            moveDirection += Vector3.forward;
         }
         if (Input.GetKey(KeyCode.S))
         {
-            rb.AddForce(Vector3.back * power);
+            moveDirection += Vector3.back;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveDirection += Vector3.left;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveDirection += Vector3.right;
         }
 
-        if (canAttack)
+        if (moveDirection != Vector3.zero)
         {
-            Attack();
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.4f);
+            transform.position += moveDirection.normalized * Time.deltaTime * _speed;
         }
-        // 공격 후 쿨타임동안 재공격 불가능 
-        else
+    }
+
+    void HandleAttack()
+    {
+        if (!canAttack)
         {
             if (LeftCoolTime > 0f) // 쿨타임 이내 
             {
                 LeftCoolTime -= Time.deltaTime;
-                Debug.Log("Cooldown: " + Mathf.Round(LeftCoolTime) + " seconds left.");
             }
             else // 쿨타임 종료 
             {
@@ -100,28 +84,85 @@ public class PlayerAttack : MonoBehaviour
             }
         }
     }
-    */
-    void Attack() // 거리가 임계 거리 이하면 공격 
-    {
-        GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
 
-        foreach (GameObject enemy in enemies)
+    void OnTriggerEnter(Collider other)
+    {
+        if (canAttack && other.CompareTag("Enemy"))
         {
-            float distance = Vector3.Distance(transform.position, enemy.transform.position);
-            if (distance <= distanceThreshold)
-            {
-                enemy.SetActive(false); // 적 죽음 
-                LeftCoolTime = CoolTime;
-                canAttack = false;
-                StartCoroutine(AttackCoolTime());
-                break; // 한번에 한 개만 공격 가능 
-            }
+            particles.gameObject.SetActive(true); // 파티클 활성화
+            StartCoroutine(AttackEnemy(other.gameObject));
         }
     }
 
-    IEnumerator AttackCoolTime()
-    { // 쿨타임 동안 기다리고 재공격 가능하도록 
-        yield return new WaitForSeconds(CoolTime);
+    void HandleArcJump()
+    {
+        if (arcJumpTimer > 0f)
+        {
+            arcJumpTimer -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Q) && arcJumpTimer <= 0f && ultimateCharges > 0) 
+        {
+            arcJumpTimer = arcJumpCooldown;
+            isArcJumping = true;
+            arcJumpTarget = GetMouseClickPosition();
+
+        }
+
+        if (isArcJumping)
+        {
+            PerformArcJump();
+        }
+    }
+
+    Vector3 GetMouseClickPosition()
+    {
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Plane plane = new Plane(Vector3.up, transform.position);
+        float distanceToPlane;
+
+        if (plane.Raycast(ray, out distanceToPlane))
+        {
+            return ray.GetPoint(distanceToPlane);
+        }
+
+        return Vector3.zero;
+    }
+
+    void PerformArcJump()
+    {
+        Vector3 initialPosition = transform.position;
+        float timer = 0f;
+
+        while (timer < arcJumpDuration)
+        {
+            float normalizedTime = timer / arcJumpDuration;
+            float yOffset = arcJumpHeight * 4f * (normalizedTime - normalizedTime * normalizedTime);
+            transform.position = Vector3.Slerp(initialPosition, arcJumpTarget, normalizedTime) + yOffset * Vector3.up;
+            timer += Time.deltaTime;
+        }
+        isArcJumping = false;
+    }
+
+    void UseUltimate()
+    { 
+        ultimateCharges--;
+        Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // 궁극기 사용 후 남은 횟수 표시
+        arcJumpTimer = arcJumpCooldown;
+        isArcJumping = true;
+        arcJumpTarget = GetMouseClickPosition();
+    }
+
+    IEnumerator AttackEnemy(GameObject enemy)
+    {
+        canAttack = false;
+        LeftCoolTime = CoolTime;
+
+        enemy.SetActive(false); // 적 죽음
+
+        yield return new WaitForSeconds(CoolTime); // 쿨타임 대기
+
+        particles.gameObject.SetActive(false); // 파티클 비활성화
         canAttack = true;
     }
 }
