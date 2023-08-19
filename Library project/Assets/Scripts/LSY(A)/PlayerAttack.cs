@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
+
     Rigidbody rb;
     float _speed = 10f;
     public bool canAttack = true;
@@ -28,6 +29,7 @@ public class PlayerAttack : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         particles.gameObject.SetActive(false); // 초기에 파티클은 비활성화
+
     }
 
     void Update()

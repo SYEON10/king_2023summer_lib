@@ -5,19 +5,19 @@ using UnityEngine.SceneManagement;
 
 public class Shoot : MonoBehaviour
 {
-   
+    //SoundManager soundManager1;
+    //public AudioClip audio2;
+
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 50.0f; 
     public float bulletLifetime = 1.0f;
     private int toggleView = 3;
 
-
-
-
     void Start()
     {
-
+       // soundManager1 = new SoundManager();
+        //soundManager1.Init(); // SoundManager √ ±‚»≠
     }
 
     void Update()
@@ -31,7 +31,9 @@ public class Shoot : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
+               // soundManager1.Play(audio2, Define.Sound.Effect);
                 ShootBullet();
+                
             }
         }
     }

@@ -8,8 +8,6 @@ public class DoorMove : MonoBehaviour
     public Transform door2Transform;
     public float slideDistance = 5.0f;
     public float slideSpeed = 2.0f;
-    public AudioSource audioSource;
-    public AudioClip audioClip;
 
     private Vector3 initial1Position;
     private Vector3 initial2Position;
@@ -24,15 +22,12 @@ public class DoorMove : MonoBehaviour
         target1Position = initial1Position + Vector3.left * slideDistance;
         target2Position = initial2Position + Vector3.right * slideDistance;
 
-        audioSource = GetComponent<AudioSource>();
-        audioSource.clip = audioClip;
-        audioSource.playOnAwake = false;
     }
 
     private void Update()
     {
         // 마우스 왼쪽 버튼 클릭을 감지합니다.
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButtonDown(1))
         {
             // 클릭된 위치의 스크린 좌표를 Ray로 변환합니다.
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -54,7 +49,7 @@ public class DoorMove : MonoBehaviour
     private void ToggleDoor()
     {
         isDoorOpen = !isDoorOpen;
-        audioSource.Play();
+       // soundManager3.Play("ElevatorSound", Define.Sound.Effect); // 엘베 사운드 삽입 
     }
 
     private void FixedUpdate()
