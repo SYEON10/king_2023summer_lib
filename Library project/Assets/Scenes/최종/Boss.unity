@@ -303,29 +303,13 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 6437578450650514384, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 161408514}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
 --- !u!1 &161408513 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6437578450650514384, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
   m_PrefabInstance: {fileID: 161408512}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &161408514
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 161408513}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb785a51eddc2a648bde8d9fed668330, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 10
 --- !u!4 &161408524 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 838099166593711380, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
@@ -1561,13 +1545,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI_Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 1557393107364296222, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -41
+      objectReference: {fileID: 0}
     - target: {fileID: 3690972314027492926, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
       propertyPath: m_margin.z
       value: -10.942963
       objectReference: {fileID: 0}
+    - target: {fileID: 3959352423799858647, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -75
+      objectReference: {fileID: 0}
     - target: {fileID: 5402809660778757621, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -28
+      value: -74
       objectReference: {fileID: 0}
     - target: {fileID: 6088681309183660186, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
       propertyPath: m_AnchorMax.x
@@ -1591,7 +1583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6088681309183660186, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -74
+      value: -38
       objectReference: {fileID: 0}
     - target: {fileID: 7385369356090655948, guid: ae67280946e5bd74daf62d6cbc48adb6, type: 3}
       propertyPath: m_Pivot.x

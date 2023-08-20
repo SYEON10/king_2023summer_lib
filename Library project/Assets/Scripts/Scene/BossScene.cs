@@ -6,7 +6,6 @@ using UnityEngine;
 
 public class BossScene : BaseScene
 {
-    private BossPlayerController _player;
     private BossController _boss;
     private EnemyAIController _enemy;
     
@@ -27,10 +26,7 @@ public class BossScene : BaseScene
         GameManager.Input.KeyAction += OnUpdate;
 
         GameManager.EnemyCount = 0;
-        
-        _player = GameObject.FindGameObjectWithTag("Player").GetOrAddComponent<BossPlayerController>();
-        if(_player == null)
-            GameManager.Resources.Instantiate("Characters/Player").GetOrAddComponent<BossPlayerController>();
+
         _boss = GameManager.Resources.Instantiate("Characters/Kazuha").GetOrAddComponent<BossController>();
 
         _enemy = Util.GetOrCreateObject("@EnemyController").GetOrAddComponent<EnemyAIController>();

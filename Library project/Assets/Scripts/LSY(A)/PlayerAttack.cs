@@ -91,10 +91,20 @@ public class PlayerAttack : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (canAttack && other.CompareTag("Enemy"))
+        if (other.CompareTag("Enemy"))
         {
-            particles.gameObject.SetActive(true); // 파티클 활성화
-            StartCoroutine(AttackEnemy(other.gameObject));
+            if (canAttack)
+            {
+                GameManager.Sound.Play("BossEffectTest", Define.Sound.Effect);
+                GameManager.EnemyCount--;
+                particles.gameObject.SetActive(true); // 파티클 활성화
+                StartCoroutine(AttackEnemy(other.gameObject));
+            }
+            else
+            {
+                GameManager.GameOver();
+                GameManager.PlayerAlive = false;
+            }
         }
     }
 
