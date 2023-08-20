@@ -83,7 +83,6 @@ public class GameManager : MonoBehaviour
             return;
 
         UI.ShowPopupUI<UI_GameOver>();
-        Scene.Clear();
     }
     
 }

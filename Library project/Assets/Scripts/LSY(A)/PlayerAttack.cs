@@ -160,6 +160,7 @@ public class PlayerAttack : MonoBehaviour
     public void PlayerDead()
     {
         GameManager.GameOver();
+        GameManager.PlayerAlive = false;
     }
     
     IEnumerator AttackEnemy(GameObject enemy)

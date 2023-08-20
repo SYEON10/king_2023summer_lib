@@ -37,6 +37,8 @@ public class UI_GameOver :UI_Popup
     private void Retry()
     {
         GameManager.UI.ClosePopupUI();
+        GameManager.PlayerAlive = true;
+        GameManager.BossAlive = true;
         GameManager.Scene.LoadScene(Define.Scene.Game);
     }
 }
