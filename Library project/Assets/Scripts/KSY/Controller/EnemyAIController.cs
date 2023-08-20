@@ -80,13 +80,19 @@ public class EnemyAIController : MonoBehaviour
 
     private void SpawnInGame()
     {
-        
+        Debug.Log("실행됨");
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], -25.0f, -18.0f, 33.0f, 38.0f, 10.0f, 0.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], 30.0f, 38.0f, -40.0f, -35.0f, 10.0f, -35.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[1], 30f, 37.0f, 33.0f, 38.0f, 10.0f, -70.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[1], -38.0f, -33.0f, -40.0f, -35.0f, 10.0f, -105.0f));
     }
 
     private void SpawnInBoss()
     {
-        Spawners.Add(new Spawn(_walkingEnemyPath[0], -38.0f, -33.0f, 33.0f, 38.0f));
-        Spawners.Add(new Spawn(_walkingEnemyPath[0], 33.0f, 38.0f, 33.0f, 38.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], -38.0f, -33.0f, 33.0f, 38.0f, 10.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[0], 33.0f, 38.0f, 33.0f, 38.0f, 10.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[1], -38.0f, -33.0f, 33.0f, 38.0f, 10.0f));
+        Spawners.Add(new Spawn(_walkingEnemyPath[1], 33.0f, 38.0f, 33.0f, 38.0f, 10.0f));
     }
 
     public void StopSpawning()

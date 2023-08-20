@@ -24,10 +24,8 @@ public class Util
     {
         T component = obj.GetComponent<T>();
         if (component == null)
-        {
             component = obj.AddComponent<T>();
-            Debug.Log($"@ERROR@ Component is missing > AddComponent in {obj}");
-        }
+        
         return component;
     }
     public static GameObject FindChild(GameObject parent, string name = null, bool recursive = false)

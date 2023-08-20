@@ -32,7 +32,7 @@ public class BossScene : BaseScene
         if(_player == null)
             GameManager.Resources.Instantiate("Characters/Player").GetOrAddComponent<BossPlayerController>();
         _boss = GameManager.Resources.Instantiate("Characters/Kazuha").GetOrAddComponent<BossController>();
-        //추후 한 스크립트로 제어할 수 있게 스크립트 수정하기
+
         _enemy = Util.GetOrCreateObject("@EnemyController").GetOrAddComponent<EnemyAIController>();
         
         _enemy.Init();
