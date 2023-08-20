@@ -26,9 +26,9 @@ public class UI_GameOver :UI_Popup
     public override void Init()
     {
         base.Init();
+        Debug.Log("GameOver 실행됨");
         Bind<TextMeshProUGUI>(typeof(Texts));
         Bind<UnityEngine.UI.Button>(typeof(Btns));
-
 
         GameObject btn = GetButton((int)Btns.Button_Retry).gameObject;
         BindUIEvent(btn, (PointerEventData data) => {Retry();});
@@ -36,6 +36,8 @@ public class UI_GameOver :UI_Popup
 
     private void Retry()
     {
+        Debug.Log("Retry 실행됨");
+
         GameManager.UI.ClosePopupUI();
         GameManager.PlayerAlive = true;
         GameManager.BossAlive = true;
