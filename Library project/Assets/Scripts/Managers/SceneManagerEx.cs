@@ -17,10 +17,6 @@ public class SceneManagerEx
         return name;
     }
 
-    public void Clear()
-    {
-        CurrentScene.Clear();
-    }
     public IEnumerator DelayLoadingScene(float delayTime)
     {
         yield return new WaitForSeconds(delayTime);

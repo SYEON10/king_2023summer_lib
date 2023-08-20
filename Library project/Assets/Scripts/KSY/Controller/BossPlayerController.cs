@@ -5,9 +5,6 @@ using UnityEngine;
 
 public class BossPlayerController : MonoBehaviour
 {
-    [SerializeField]
-    float _speed = 10.0f;
-
     private PlayerAttack player; //추후 PlayerAttack 이랑 병합하고 없애기
     
     void Start()
@@ -15,34 +12,11 @@ public class BossPlayerController : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player").GetOrAddComponent<PlayerAttack>();
     }
 
-    void Update()
-    {
-        if (Input.GetKey(KeyCode.W))
-        { 
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.forward), _speed);
-            transform.position += Vector3.forward * Time.deltaTime * _speed;
-        } 
-        if (Input.GetKey(KeyCode.S))
-        {
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.back), _speed);
-            transform.position += Vector3.back * Time.deltaTime * _speed;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.left), _speed);
-            transform.position += Vector3.left * Time.deltaTime * _speed;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Vector3.right), _speed);
-            transform.position += Vector3.right * Time.deltaTime * _speed;
-        }
-    }
-
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name != "Kazuha")
+        if (other.tag == "Enemy")
         {
+            GameManager.Sound.Play("BossEffectTest", Define.Sound.Effect);
             if (!player.canAttack)
             {
                 GameManager.GameOver();

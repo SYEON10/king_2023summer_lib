@@ -52,10 +52,4 @@ public class BossScene : BaseScene
         GameManager.UI.ShowPopupUI<UI_GameClear>();
         StartCoroutine(GameManager.Scene.DelayLoadingScene(3.0f));
     }
-
-    public override void Clear()
-    {
-        _player.enabled = false;
-        _boss.enabled = false;
-    }
 }

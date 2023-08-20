@@ -15,7 +15,4 @@ public abstract class BaseScene : MonoBehaviour
             GameManager.Resources.Instantiate("UI/EventSystem").name = "@EventSystem";
         }
     }
-
-    public abstract void Clear();
-
 }
