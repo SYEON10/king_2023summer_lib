@@ -6,7 +6,7 @@ public class FallingFloor : MonoBehaviour
 
 {
     public Rigidbody floorRigidbody; // floor의 Rigidbody 컴포넌트
-    public float fallSpeed = 5f; // 떨어지는 속도
+    public float fallSpeed = 10f; // 떨어지는 속도
 
     private bool isFalling = false; // floor가 떨어지고 있는지 여부
 
