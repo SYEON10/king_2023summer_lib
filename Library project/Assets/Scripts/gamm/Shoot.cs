@@ -5,9 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class Shoot : MonoBehaviour
 {
-    //SoundManager soundManager1;
-    //public AudioClip audio2;
-
+   
     public GameObject bulletPrefab;
     public Transform bulletSpawnPoint;
     public float bulletSpeed = 50.0f; 
@@ -16,8 +14,7 @@ public class Shoot : MonoBehaviour
 
     void Start()
     {
-       // soundManager1 = new SoundManager();
-        //soundManager1.Init(); // SoundManager √ ±‚»≠
+       
     }
 
     void Update()
@@ -31,7 +28,7 @@ public class Shoot : MonoBehaviour
         {
             if (Input.GetMouseButtonDown(0))
             {
-               // soundManager1.Play(audio2, Define.Sound.Effect);
+                GameManager.Sound.Play("FarAttackSound", Define.Sound.Effect);
                 ShootBullet();
                 
             }

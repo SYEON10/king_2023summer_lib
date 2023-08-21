@@ -95,7 +95,7 @@ public class PlayerAttack : MonoBehaviour
         {
             if (canAttack)
             {
-                GameManager.Sound.Play("BossEffectTest", Define.Sound.Effect);
+                GameManager.Sound.Play("CloseAttack", Define.Sound.Effect);
                 GameManager.EnemyCount--;
                 particles.gameObject.SetActive(true); // 파티클 활성화
                 StartCoroutine(AttackEnemy(other.gameObject));
@@ -171,8 +171,12 @@ public class PlayerAttack : MonoBehaviour
     {
         GameManager.GameOver();
         GameManager.PlayerAlive = false;
+        GameManager.Sound.Play("PlayerDead", Define.Sound.Effect);
+        
     }
-    
+
+
+
     IEnumerator AttackEnemy(GameObject enemy)
     {
         canAttack = false;

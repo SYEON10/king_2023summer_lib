@@ -49,7 +49,7 @@ public class DoorMove : MonoBehaviour
     private void ToggleDoor()
     {
         isDoorOpen = !isDoorOpen;
-       // soundManager3.Play("ElevatorSound", Define.Sound.Effect); // 엘베 사운드 삽입 
+        GameManager.Sound.Play("ElevatorSound", Define.Sound.Effect); // 엘베 사운드 삽입 
     }
 
     private void FixedUpdate()
