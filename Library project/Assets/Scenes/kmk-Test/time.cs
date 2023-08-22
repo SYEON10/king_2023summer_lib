@@ -5,7 +5,7 @@ public class time : MonoBehaviour
 {
     private bool isInteracting = false; // 플레이어와 상호작용 중인지 여부
     private float interactionTime = 0f; // 상호작용 시작 시간
-    private const float maxInteractionTime = 60f; // 최대 제한시간 (1분)
+    private const float maxInteractionTime = 3f; // 최대 제한시간 (1분)
 
     private void Update()
     {
@@ -40,6 +40,6 @@ public class time : MonoBehaviour
 
     public void NextSceneWithNum()
     {
-        SceneManager.LoadScene("Boss");
+        GameManager.Scene.LoadScene(Define.Scene.Boss);
     }
 }
