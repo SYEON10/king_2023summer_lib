@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class DoorMove : MonoBehaviour
 {
+    private EnemyAIController _enemy;
+    
     public Transform door1Transform;
     public Transform door2Transform;
     public float slideDistance = 5.0f;
@@ -40,7 +42,6 @@ public class DoorMove : MonoBehaviour
                 if (hit.collider.gameObject.name == "Up Button" || hit.collider.gameObject.name == "Down Button")
                 {
                     ToggleDoor();
-                    
                 }
             }
         }
@@ -50,6 +51,9 @@ public class DoorMove : MonoBehaviour
     {
         isDoorOpen = !isDoorOpen;
         GameManager.Sound.Play("ElevatorSound", Define.Sound.Effect); // 엘베 사운드 삽입 
+        
+        _enemy = Util.GetOrCreateObject("@EnemyController").GetOrAddComponent<EnemyAIController>();
+        _enemy.Init();
     }
 
     private void FixedUpdate()
