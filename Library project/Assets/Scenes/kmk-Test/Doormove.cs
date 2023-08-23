@@ -23,7 +23,6 @@ public class DoorMove : MonoBehaviour
         initial2Position = door2Transform.position; 
         target1Position = initial1Position + Vector3.left * slideDistance;
         target2Position = initial2Position + Vector3.right * slideDistance;
-
     }
 
     private void Update()
@@ -63,7 +62,6 @@ public class DoorMove : MonoBehaviour
         Vector3 target1 = isDoorOpen ? target1Position : initial1Position;
         door1Transform.position = Vector3.MoveTowards(door1Transform.position, target1, slideSpeed * Time.fixedDeltaTime);
         door2Transform.position = Vector3.MoveTowards(door2Transform.position, target2, slideSpeed * Time.fixedDeltaTime);
-
     }
 }
 
