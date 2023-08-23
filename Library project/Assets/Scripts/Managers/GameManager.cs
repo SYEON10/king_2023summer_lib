@@ -10,6 +10,8 @@ public class GameManager : MonoBehaviour
     public static bool PlayerAlive { private get; set; } = true;
     public static bool BossAlive { private get; set; } = true;
 
+    public static float Timer;
+
     
     #region Managers
     private static GameManager _instance;
