@@ -67,6 +67,14 @@ public class SoundManager
         }
         else if (type == Define.Sound.Effect)
         {
+            if (!GameManager.PlayerAlive)
+            {
+                Debug.Log("개새끼야야ㅏ아아");
+                AudioSource audioSource1 = _audioSources[(int)Define.Sound.Bgm];
+
+                if (audioSource1.isPlaying)
+                    audioSource1.Stop();
+            }
             AudioSource audioSource = _audioSources[(int)Define.Sound.Effect];
             audioSource.pitch = pitch;
             audioSource.PlayOneShot(audioClip);

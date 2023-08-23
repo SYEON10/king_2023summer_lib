@@ -7,8 +7,8 @@ using UnityEngine.PlayerLoop;
 public class GameManager : MonoBehaviour
 {
     public static int EnemyCount = 0;
-    public static bool PlayerAlive { private get; set; } = true;
-    public static bool BossAlive { private get; set; } = true;
+    public static bool PlayerAlive { get; set; } = true;
+    public static bool BossAlive { get; set; } = true;
     public static float Timer;
     public static bool isPaused { private get; set; } = false;
 
@@ -81,6 +81,8 @@ public class GameManager : MonoBehaviour
         */
         if (PlayerAlive == false || BossAlive == false)
             return;
+
+        PlayerAlive = false;
         
         GameObject GameOverUI = GameObject.Find("UI_GameOver");
         GameOverUI.transform.GetChild(0).gameObject.SetActive(true);
