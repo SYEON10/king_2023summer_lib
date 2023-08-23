@@ -12,6 +12,8 @@ public class PlayerAttack : MonoBehaviour
     float CoolTime = 5f; // 재공격 가능할 때까지의 시간 
     float LeftCoolTime = 0f; // 쿨타임 끝나기까지 남은 시간
 
+    public GameObject elevator;
+
     [SerializeField] GameObject particles;
 
     public float P_LeftCoolTime
@@ -42,10 +44,22 @@ public class PlayerAttack : MonoBehaviour
         MovePlayer();
         HandleAttack();
         HandleArcJump();
+        Player_Elevator_Check();
 
         if (Input.GetKeyDown(KeyCode.Q) && ultimateCharges > 0)
         {
             UseUltimate();
+        }
+    }
+
+    void Player_Elevator_Check()
+    {
+        if (GameManager.Scene.CurrentScene.SceneType == Define.Scene.Game)
+        {
+            if (gameObject.transform.position.y < elevator.transform.position.y - 10.0f)
+            {
+                GameManager.GameOver();
+            }
         }
     }
 
