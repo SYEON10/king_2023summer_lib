@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public static int EnemyCount = 0;
     public static bool PlayerAlive { private get; set; } = true;
     public static bool BossAlive { private get; set; } = true;
+    public static float Timer;
     public static bool isPaused { private get; set; } = false;
     [SerializeField] private static GameObject GameOverUI;
     
