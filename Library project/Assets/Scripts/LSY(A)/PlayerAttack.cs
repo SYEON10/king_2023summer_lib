@@ -9,8 +9,8 @@ public class PlayerAttack : MonoBehaviour
     Rigidbody rb;
     float _speed = 10f;
     public bool canAttack = true;
-    float CoolTime = 5f; // ����� ������ �������� �ð� 
-    float LeftCoolTime = 0f; // ��Ÿ�� ��������� ���� �ð�
+    float CoolTime = 5f; // 재공격 가능할 때까지의 시간 
+    float LeftCoolTime = 0f; // 쿨타임 끝나기까지 남은 시간
 
     [SerializeField] GameObject particles;
     public float P_LeftCoolTime { get { return LeftCoolTime; } }
@@ -21,19 +21,14 @@ public class PlayerAttack : MonoBehaviour
     float arcJumpHeight = 5f;
     bool isArcJumping = false;
 
-    public GameObject Cam;
-    public CharacterController SelectPlayer;
-    public float Speed = 5.0f;
-    private Vector3 MoveDir = Vector3.zero;
-
     Vector3 arcJumpTarget;
-    public int ultimateCharges = 3; // �ñر� Ƚ�� 
+    public int ultimateCharges = 3; // 궁극기 횟수 
     //public Text Count; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        particles.gameObject.SetActive(false); // �ʱ⿡ ��ƼŬ�� ��Ȱ��ȭ
+        particles.gameObject.SetActive(false); // 초기에 파티클은 비활성화
 
     }
 
@@ -51,31 +46,42 @@ public class PlayerAttack : MonoBehaviour
 
     void MovePlayer()
     {
+        Vector3 moveDirection = Vector3.zero;
 
-        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
+        if (Input.GetKey(KeyCode.W))
         {
-            var offset = Cam.transform.forward;
-            offset.y = 0;
-            transform.LookAt(SelectPlayer.transform.position + offset);
+            moveDirection += Vector3.forward;
+        }
+        if (Input.GetKey(KeyCode.S))
+        {
+            moveDirection += Vector3.back;
+        }
+        if (Input.GetKey(KeyCode.A))
+        {
+            moveDirection += Vector3.left;
+        }
+        if (Input.GetKey(KeyCode.D))
+        {
+            moveDirection += Vector3.right;
         }
 
-            MoveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-            MoveDir = SelectPlayer.transform.TransformDirection(MoveDir);
-            MoveDir *= Speed;
-
-        SelectPlayer.Move(MoveDir * Time.deltaTime);
-
+        if (moveDirection != Vector3.zero)
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
+            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.4f);
+            transform.position += moveDirection.normalized * Time.deltaTime * _speed;
+        }
     }
 
-        void HandleAttack()
+    void HandleAttack()
     {
         if (!canAttack)
         {
-            if (LeftCoolTime > 0f) // ��Ÿ�� �̳� 
+            if (LeftCoolTime > 0f) // 쿨타임 이내 
             {
                 LeftCoolTime -= Time.deltaTime;
             }
-            else // ��Ÿ�� ���� 
+            else // 쿨타임 종료 
             {
                 canAttack = true;
                 LeftCoolTime = 0f;
@@ -91,7 +97,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 GameManager.Sound.Play("CloseAttack", Define.Sound.Effect);
                 GameManager.EnemyCount--;
-                particles.gameObject.SetActive(true); // ��ƼŬ Ȱ��ȭ
+                particles.gameObject.SetActive(true); // 파티클 활성화
                 StartCoroutine(AttackEnemy(other.gameObject));
             }
             else
@@ -155,7 +161,7 @@ public class PlayerAttack : MonoBehaviour
     void UseUltimate()
     { 
         ultimateCharges--;
-        Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // �ñر� ��� �� ���� Ƚ�� ǥ��
+        Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // 궁극기 사용 후 남은 횟수 표시
         arcJumpTimer = arcJumpCooldown;
         isArcJumping = true;
         arcJumpTarget = GetMouseClickPosition();
@@ -163,24 +169,22 @@ public class PlayerAttack : MonoBehaviour
 
     public void PlayerDead()
     {
+        GameManager.Sound.Play("GameOver", Define.Sound.Effect);
+        GameManager.PauseGame();
         GameManager.GameOver();
         GameManager.PlayerAlive = false;
-        GameManager.Sound.Play("PlayerDead", Define.Sound.Effect);
-        
     }
-
-
 
     IEnumerator AttackEnemy(GameObject enemy)
     {
         canAttack = false;
         LeftCoolTime = CoolTime;
 
-        enemy.SetActive(false); // �� ����
+        enemy.SetActive(false); // 적 죽음
 
-        yield return new WaitForSeconds(CoolTime); // ��Ÿ�� ���
+        yield return new WaitForSeconds(CoolTime); // 쿨타임 대기
 
-        particles.gameObject.SetActive(false); // ��ƼŬ ��Ȱ��ȭ
+        particles.gameObject.SetActive(false); // 파티클 비활성화
         canAttack = true;
     }
 }
