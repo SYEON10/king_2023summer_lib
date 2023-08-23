@@ -55,8 +55,6 @@ public class BossScene : BaseScene
         GameManager.Resources.Destroy(_player);
         */
         
-        //+모든 몬스터 삭제
-        GameManager.UI.ShowPopupUI<UI_GameClear>();
-        StartCoroutine(GameManager.Scene.DelayLoadingScene(3.0f));
+        GameManager.Scene.LoadScene(Define.Scene.Ending);
     }
 }
