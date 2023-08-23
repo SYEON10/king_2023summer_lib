@@ -58,6 +58,7 @@ public class PlayerAttack : MonoBehaviour
             if (gameObject.transform.position.y < elevator.transform.position.y - 10.0f)
             {
                 GameManager.GameOver();
+                GameManager.Sound.Play("GameOver", Define.Sound.Effect);
             }
         }
     }
