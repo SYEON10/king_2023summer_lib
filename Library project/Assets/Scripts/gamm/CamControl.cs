@@ -5,56 +5,41 @@ using UnityEngine;
 
 public class CamControl : MonoBehaviour
 {
-    public GameObject player; //µû¶ó´Ù´Ò ¿ÀºêÁ§Æ® ÁöÁ¤ 
-    public float xmove = 0; //x ´©Àû ¿òÁ÷ÀÎ ¾ç
-    public float ymove = 0; //y ´©Àû ¿òÁ÷ÀÎ 
+    public GameObject player; // í”Œë ˆì´ì–´ ì˜¤ë¸Œì íŠ¸ë¥¼ ì—°ê²°í•  ë³€ìˆ˜
+    public float xmove = 0; // x ì¶• íšŒì „ê°’
+    public float ymove = 0; // y ì¶• íšŒì „ê°’
 
     public Transform target;
     public Vector3 offset;
 
     public float SmoothTime = 0.2f;
     private Vector3 velocity = Vector3.zero;
-    private int toggleView = 3; //ÇöÀç 1ÀÎÄªÀÎÁö, 3ÀÎÄªÀÎÁö ÆÇ´Ü. Ã³À½¿¡´Â 3ÀÎÄª 
-
-
-
-    void Start()
-    {
-
-    }
-
+    private int toggleView = 3; // ì¹´ë©”ë¼ ë³´ê¸° ëª¨ë“œ í† ê¸€ (1 or 3)
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(2)) //ÈÙÅ¬¸¯, 1/3ÀÎÄª ½ÃÁ¡ ÀüÈ¯
-            toggleView = 4 - toggleView; //1>3 Å¬¸¯¶§¸¶´Ù º¯ÇÔ 
+        if (Input.GetMouseButtonDown(2)) // ë§ˆìš°ìŠ¤ ì¤‘ê°„ ë²„íŠ¼ í´ë¦­ì‹œ
+            toggleView = 4 - toggleView; // 1ì„ 3ìœ¼ë¡œ, 3ì„ 1ìœ¼ë¡œ ë³€ê²½í•˜ì—¬ ë³´ê¸° ëª¨ë“œ í† ê¸€
 
-        if (toggleView == 1) //1ÀÎÄªÀÏ¶§ 
+        if (toggleView == 1) // ë³´ê¸° ëª¨ë“œê°€ 1ì¼ ë•Œ
         {
+            xmove += Input.GetAxis("Mouse X"); // ë§ˆìš°ìŠ¤ X ì´ë™ì— ë”°ë¼ x íšŒì „ê°’ ë³€ê²½
+            ymove -= Input.GetAxis("Mouse Y"); // ë§ˆìš°ìŠ¤ Y ì´ë™ì— ë”°ë¼ y íšŒì „ê°’ ë³€ê²½
 
-
-
-
-
-            xmove += Input.GetAxis("Mouse X"); //¸¶¿ì½ºÀÇ ÁÂ¿ì ÀÌµ¿·®À» xmove¿¡ ´©Àû
-            ymove -= Input.GetAxis("Mouse Y"); //¸¶¿ì½ºÀÇ »óÇÏ ÀÌµ¿·®À» ymove¿¡ ´©Àû
-
-            transform.rotation = Quaternion.Euler(ymove * 2, xmove * 2, 0); //ÀÌµ¿·®¿¡ µû¶ó Ä«¸Ş¶ó°¡ ¹Ù¶óº¸´Â ¹æÇâ Á¶Á¤ , µå·¡±× ¼Óµµ°¡ ´À·Á¼­ *2ÇßÀ½ 
-            Vector3 reverseDistance = new Vector3(0.0f, 5.0f, 1.0f); // Ä«¸Ş¶ó°¡ ¹Ù¶óº¸´Â ¾Õ¹æÇâÀº Z Ãà, ÀÌµ¿·®¿¡ µû¸¥ Z Ãà¹æÇâÀÇ º¤ÅÍ¸¦ ±¸ÇÔ 
-            transform.position = player.transform.position + transform.rotation * reverseDistance; // ÇÃ·¹ÀÌ¾îÀÇ À§Ä¡¿¡¼­ Ä«¸Ş¶ó°¡ ¹Ù¶óº¸´Â ¹æÇâ¿¡ º¤ÅÍ°ªÀ» Àû¿ëÇÑ »ó´ë ÁÂÇ¥¸¦ Â÷°¨
-
+            transform.rotation = Quaternion.Euler(ymove * 2, xmove * 2, 0); // íšŒì „ê°’ì„ ì ìš©í•˜ì—¬ ì¹´ë©”ë¼ íšŒì „
+            Vector3 reverseDistance = new Vector3(0.0f, 5.0f, 1.0f);
+            transform.position = player.transform.position + transform.rotation * reverseDistance; // í”Œë ˆì´ì–´ ì£¼ìœ„ë¡œ ì´ë™í•˜ì—¬ ì‹œì  ë³€ê²½
         }
-        else if (toggleView == 3)
+        else if (toggleView == 3) // ë³´ê¸° ëª¨ë“œê°€ 3ì¼ ë•Œ
         {
-            if (Input.GetMouseButton(1))
+            if (Input.GetMouseButton(1)) // ë§ˆìš°ìŠ¤ ì˜¤ë¥¸ìª½ ë²„íŠ¼ì´ ëˆŒë¦° ê²½ìš°
             {
-                xmove += Input.GetAxis("Mouse X"); //¸¶¿ì½ºÀÇ ÁÂ¿ì ÀÌµ¿·®À» xmove¿¡ ´©Àû
-                ymove -= Input.GetAxis("Mouse Y"); //¸¶¿ì½ºÀÇ »óÇÏ ÀÌµ¿·®À» ymove¿¡ ´©Àû
+                xmove += Input.GetAxis("Mouse X"); // ë§ˆìš°ìŠ¤ X ì´ë™ì— ë”°ë¼ x íšŒì „ê°’ ë³€ê²½
+                ymove -= Input.GetAxis("Mouse Y"); // ë§ˆìš°ìŠ¤ Y ì´ë™ì— ë”°ë¼ y íšŒì „ê°’ ë³€ê²½
             }
-            transform.rotation = Quaternion.Euler(ymove * 2, xmove * 2, 0); //ÀÌµ¿·®¿¡ µû¶ó Ä«¸Ş¶ó°¡ ¹Ù¶óº¸´Â ¹æÇâ Á¶Á¤ , µå·¡±× ¼Óµµ°¡ ´À·Á¼­ *2ÇßÀ½ 
+            transform.rotation = Quaternion.Euler(ymove * 2, xmove * 2, 0); // íšŒì „ê°’ì„ ì ìš©í•˜ì—¬ ì¹´ë©”ë¼ íšŒì „
             Vector3 reverseDistance1 = new Vector3(0.0f, 6.0f, -20.0f);
-            transform.position = player.transform.position + transform.rotation * reverseDistance1;
- 
+            transform.position = player.transform.position + transform.rotation * reverseDistance1; // í”Œë ˆì´ì–´ ì£¼ìœ„ë¡œ ì´ë™í•˜ì—¬ ì‹œì  ë³€ê²½
         }
     }
 }
