@@ -11,8 +11,7 @@ public class GameManager : MonoBehaviour
     public static bool BossAlive { private get; set; } = true;
     public static float Timer;
     public static bool isPaused { private get; set; } = false;
-    [SerializeField] private static GameObject GameOverUI;
-    
+
     #region Managers
     private static GameManager _instance;
     static GameManager GetGm
@@ -83,13 +82,15 @@ public class GameManager : MonoBehaviour
         if (PlayerAlive == false || BossAlive == false)
             return;
         
-        GameOverUI.SetActive(true);
+        GameObject GameOverUI = GameObject.Find("UI_GameOver");
+        GameOverUI.transform.GetChild(0).gameObject.SetActive(true);
     }
     
     public static void Retry()
     {
         Debug.Log("Retry 실행됨");
 
+        PlayGame();
         UI.ClosePopupUI();
         PlayerAlive = true;
         BossAlive = true;

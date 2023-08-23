@@ -5,12 +5,6 @@ using static Define;
 
 public class UIGameClear : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
     public void BackToMain_Btn()
     {
         GameManager.Scene.LoadScene(Scene.Main);
@@ -18,6 +12,6 @@ public class UIGameClear : MonoBehaviour
 
     public void ReStartGame_Btn()
     {
-        GameManager.Scene.LoadScene(Scene.Game);
+        GameManager.Retry();
     }
 }
