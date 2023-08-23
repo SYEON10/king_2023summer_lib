@@ -13,7 +13,11 @@ public class PlayerAttack : MonoBehaviour
     float LeftCoolTime = 0f; // 쿨타임 끝나기까지 남은 시간
 
     [SerializeField] GameObject particles;
-    public float P_LeftCoolTime { get { return LeftCoolTime; } }
+
+    public float P_LeftCoolTime
+    {
+        get { return LeftCoolTime; }
+    }
 
     float arcJumpCooldown = 2f;
     float arcJumpDuration = 1.5f;
@@ -22,6 +26,7 @@ public class PlayerAttack : MonoBehaviour
     bool isArcJumping = false;
 
     Vector3 arcJumpTarget;
+
     public int ultimateCharges = 3; // 궁극기 횟수 
     //public Text Count; 
 
@@ -52,14 +57,17 @@ public class PlayerAttack : MonoBehaviour
         {
             moveDirection += Vector3.forward;
         }
+
         if (Input.GetKey(KeyCode.S))
         {
             moveDirection += Vector3.back;
         }
+
         if (Input.GetKey(KeyCode.A))
         {
             moveDirection += Vector3.left;
         }
+
         if (Input.GetKey(KeyCode.D))
         {
             moveDirection += Vector3.right;
@@ -155,6 +163,7 @@ public class PlayerAttack : MonoBehaviour
             transform.position = Vector3.Slerp(initialPosition, arcJumpTarget, normalizedTime) + yOffset * Vector3.up;
             timer += Time.deltaTime;
         }
+
         isArcJumping = false;
     }
 
@@ -187,10 +196,4 @@ public class PlayerAttack : MonoBehaviour
         particles.gameObject.SetActive(false); // 파티클 비활성화
         canAttack = true;
     }
-<<<<<<< Updated upstream
 }
-=======
-}
-message.txt
-6KB
->>>>>>> Stashed changes
