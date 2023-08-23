@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.37311912, g: 0.3807398, b: 0.3587271, a: 1}
+  m_IndirectSpecularColor: {r: 0.37311918, g: 0.3807398, b: 0.35872716, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -460,7 +460,7 @@ MeshCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 5
-  m_Convex: 0
+  m_Convex: 1
   m_CookingOptions: 30
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!65 &150124233
@@ -606,6 +606,14 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 8282474796597619236, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
+      propertyPath: Cam
+      value: 
+      objectReference: {fileID: 1914746515}
+    - target: {fileID: 8282474796597619236, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
+      propertyPath: SelectPlayer
+      value: 
+      objectReference: {fileID: 1247184587}
     m_RemovedComponents:
     - {fileID: 8085397357287787884, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
     - {fileID: 4807215058907624563, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
@@ -621,6 +629,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 6437578450650514384, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1247184578}
+    - targetCorrespondingSourceObject: {fileID: 6437578450650514384, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1247184587}
   m_SourcePrefab: {fileID: 100100000, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
 --- !u!1 &175664837
 GameObject:
@@ -2242,6 +2253,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87837a30bb307034d8ffea7d57c64266, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!143 &1247184587
+CharacterController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1247184557}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Height: 2
+  m_Radius: 0.5
+  m_SlopeLimit: 45
+  m_StepOffset: 0.3
+  m_SkinWidth: 0.08
+  m_MinMoveDistance: 0.001
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &1302031920
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,6 +21,11 @@ public class PlayerAttack : MonoBehaviour
     float arcJumpHeight = 5f;
     bool isArcJumping = false;
 
+    public GameObject Cam;
+    public CharacterController SelectPlayer;
+    public float Speed = 5.0f;
+    private Vector3 MoveDir = Vector3.zero;
+
     Vector3 arcJumpTarget;
     public int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
     //public Text Count; 
@@ -46,34 +51,23 @@ public class PlayerAttack : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector3 moveDirection = Vector3.zero;
 
-        if (Input.GetKey(KeyCode.W))
+        if (Input.GetAxis("Horizontal") != 0 || Input.GetAxis("Vertical") != 0)
         {
-            moveDirection += Vector3.forward;
-        }
-        if (Input.GetKey(KeyCode.S))
-        {
-            moveDirection += Vector3.back;
-        }
-        if (Input.GetKey(KeyCode.A))
-        {
-            moveDirection += Vector3.left;
-        }
-        if (Input.GetKey(KeyCode.D))
-        {
-            moveDirection += Vector3.right;
+            var offset = Cam.transform.forward;
+            offset.y = 0;
+            transform.LookAt(SelectPlayer.transform.position + offset);
         }
 
-        if (moveDirection != Vector3.zero)
-        {
-            Quaternion targetRotation = Quaternion.LookRotation(moveDirection);
-            transform.rotation = Quaternion.Slerp(transform.rotation, targetRotation, 0.4f);
-            transform.position += moveDirection.normalized * Time.deltaTime * _speed;
-        }
+            MoveDir = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+            MoveDir = SelectPlayer.transform.TransformDirection(MoveDir);
+            MoveDir *= Speed;
+
+        SelectPlayer.Move(MoveDir * Time.deltaTime);
+
     }
 
-    void HandleAttack()
+        void HandleAttack()
     {
         if (!canAttack)
         {
