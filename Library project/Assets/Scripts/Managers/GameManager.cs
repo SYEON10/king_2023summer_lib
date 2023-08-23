@@ -9,7 +9,8 @@ public class GameManager : MonoBehaviour
     public static int EnemyCount = 0;
     public static bool PlayerAlive { private get; set; } = true;
     public static bool BossAlive { private get; set; } = true;
-
+    public static bool isPaused { private get; set; } = false;
+    [SerializeField] private static GameObject GameOverUI;
     
     #region Managers
     private static GameManager _instance;
@@ -80,7 +81,29 @@ public class GameManager : MonoBehaviour
         */
         if (PlayerAlive == false || BossAlive == false)
             return;
+        
+        GameOverUI.SetActive(true);
+    }
+    
+    public static void Retry()
+    {
+        Debug.Log("Retry 실행됨");
 
-        UI.ShowPopupUI<UI_GameOver>();
+        UI.ClosePopupUI();
+        PlayerAlive = true;
+        BossAlive = true;
+        Scene.LoadScene(Define.Scene.Game);
+    }
+
+    public static void PauseGame()
+    {
+        Time.timeScale = 0f;
+        isPaused = true;
+    }
+
+    public static void PlayGame()
+    {
+        Time.timeScale = 1f;
+        isPaused = false;
     }
 }
