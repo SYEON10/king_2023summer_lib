@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class PlayerAttack : MonoBehaviour
 {
-
     Rigidbody rb;
     float _speed = 10f;
     public bool canAttack = true;
