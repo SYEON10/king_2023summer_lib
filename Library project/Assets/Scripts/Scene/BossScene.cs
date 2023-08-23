@@ -8,6 +8,7 @@ public class BossScene : BaseScene
 {
     private BossController _boss;
     private EnemyAIController _enemy;
+    private Coroutine _clearCoroutine;
     
     private void Start()
     {
@@ -32,11 +33,19 @@ public class BossScene : BaseScene
         _enemy = Util.GetOrCreateObject("@EnemyController").GetOrAddComponent<EnemyAIController>();
         
         _enemy.Init();
+
+        StartCoroutine(GameClear_Coroutine());
     }
 
     public void OnUpdate()
     {
         _enemy.OnUpdate();
+    }
+
+    IEnumerator GameClear_Coroutine()
+    {
+        yield return new WaitForSeconds(100.0f);
+        GameClear();
     }
 
     public void GameClear()
@@ -45,6 +54,8 @@ public class BossScene : BaseScene
         GameObject _player = GameObject.Find("Player");
         GameManager.Resources.Destroy(_player);
         */
+        
+        //+모든 몬스터 삭제
         GameManager.UI.ShowPopupUI<UI_GameClear>();
         StartCoroutine(GameManager.Scene.DelayLoadingScene(3.0f));
     }
