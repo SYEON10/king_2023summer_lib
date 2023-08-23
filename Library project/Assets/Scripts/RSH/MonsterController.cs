@@ -127,7 +127,7 @@ public class MonsterController : BaseController
 	// TODO
 	private void OnCollisionEnter(Collision other)
 	{
-		if (!other.gameObject == player)
+		if (other.gameObject != player)
 		{
 			return;
 		}
