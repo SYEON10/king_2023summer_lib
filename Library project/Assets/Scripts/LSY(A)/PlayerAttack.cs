@@ -9,8 +9,8 @@ public class PlayerAttack : MonoBehaviour
     Rigidbody rb;
     float _speed = 10f;
     public bool canAttack = true;
-    float CoolTime = 5f; // Àç°ø°Ý °¡´ÉÇÒ ¶§±îÁöÀÇ ½Ã°£ 
-    float LeftCoolTime = 0f; // ÄðÅ¸ÀÓ ³¡³ª±â±îÁö ³²Àº ½Ã°£
+    float CoolTime = 5f; // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½ 
+    float LeftCoolTime = 0f; // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Ã°ï¿½
 
     [SerializeField] GameObject particles;
     public float P_LeftCoolTime { get { return LeftCoolTime; } }
@@ -27,13 +27,13 @@ public class PlayerAttack : MonoBehaviour
     private Vector3 MoveDir = Vector3.zero;
 
     Vector3 arcJumpTarget;
-    public int ultimateCharges = 3; // ±Ã±Ø±â È½¼ö 
+    public int ultimateCharges = 3; // ï¿½Ã±Ø±ï¿½ È½ï¿½ï¿½ 
     //public Text Count; 
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        particles.gameObject.SetActive(false); // ÃÊ±â¿¡ ÆÄÆ¼Å¬Àº ºñÈ°¼ºÈ­
+        particles.gameObject.SetActive(false); // ï¿½Ê±â¿¡ ï¿½ï¿½Æ¼Å¬ï¿½ï¿½ ï¿½ï¿½È°ï¿½ï¿½È­
 
     }
 
@@ -71,11 +71,11 @@ public class PlayerAttack : MonoBehaviour
     {
         if (!canAttack)
         {
-            if (LeftCoolTime > 0f) // ÄðÅ¸ÀÓ ÀÌ³» 
+            if (LeftCoolTime > 0f) // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½Ì³ï¿½ 
             {
                 LeftCoolTime -= Time.deltaTime;
             }
-            else // ÄðÅ¸ÀÓ Á¾·á 
+            else // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
             {
                 canAttack = true;
                 LeftCoolTime = 0f;
@@ -91,7 +91,7 @@ public class PlayerAttack : MonoBehaviour
             {
                 GameManager.Sound.Play("CloseAttack", Define.Sound.Effect);
                 GameManager.EnemyCount--;
-                particles.gameObject.SetActive(true); // ÆÄÆ¼Å¬ È°¼ºÈ­
+                particles.gameObject.SetActive(true); // ï¿½ï¿½Æ¼Å¬ È°ï¿½ï¿½È­
                 StartCoroutine(AttackEnemy(other.gameObject));
             }
             else
@@ -155,7 +155,7 @@ public class PlayerAttack : MonoBehaviour
     void UseUltimate()
     { 
         ultimateCharges--;
-        Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // ±Ã±Ø±â »ç¿ë ÈÄ ³²Àº È½¼ö Ç¥½Ã
+        Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // ï¿½Ã±Ø±ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È½ï¿½ï¿½ Ç¥ï¿½ï¿½
         arcJumpTimer = arcJumpCooldown;
         isArcJumping = true;
         arcJumpTarget = GetMouseClickPosition();
@@ -176,11 +176,11 @@ public class PlayerAttack : MonoBehaviour
         canAttack = false;
         LeftCoolTime = CoolTime;
 
-        enemy.SetActive(false); // Àû Á×À½
+        enemy.SetActive(false); // ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        yield return new WaitForSeconds(CoolTime); // ÄðÅ¸ÀÓ ´ë±â
+        yield return new WaitForSeconds(CoolTime); // ï¿½ï¿½Å¸ï¿½ï¿½ ï¿½ï¿½ï¿½
 
-        particles.gameObject.SetActive(false); // ÆÄÆ¼Å¬ ºñÈ°¼ºÈ­
+        particles.gameObject.SetActive(false); // ï¿½ï¿½Æ¼Å¬ ï¿½ï¿½È°ï¿½ï¿½È­
         canAttack = true;
     }
 }
