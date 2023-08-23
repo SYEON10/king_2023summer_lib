@@ -39,6 +39,7 @@ public class EnemyAIController : MonoBehaviour
             _waitingTime = waitingTime;
 
             _enemyParent = Util.GetOrCreateObject($"@EnemyParent_{Util.GetNameFromPath(enemyPath)}_({(minIncX + maxIncX) / 2} : {(minIncZ + maxIncZ) / 2})");
+            _enemyParent.tag = "Spawner";
             CreateEnemy();
         }
         
