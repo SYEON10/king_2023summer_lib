@@ -38,7 +38,7 @@ public class PlayerAttack : MonoBehaviour
         HandleAttack();
         HandleArcJump();
 
-        if (Input.GetKeyDown(KeyCode.Q) && ultimateCharges>0)
+        if (Input.GetKeyDown(KeyCode.Q) && ultimateCharges > 0)
         {
             UseUltimate();
         }
@@ -115,7 +115,7 @@ public class PlayerAttack : MonoBehaviour
             arcJumpTimer -= Time.deltaTime;
         }
 
-        if (Input.GetKeyDown(KeyCode.Q) && arcJumpTimer <= 0f && ultimateCharges > 0) 
+        if (Input.GetKeyDown(KeyCode.Q) && arcJumpTimer <= 0f && ultimateCharges > 0)
         {
             arcJumpTimer = arcJumpCooldown;
             isArcJumping = true;
@@ -159,7 +159,7 @@ public class PlayerAttack : MonoBehaviour
     }
 
     void UseUltimate()
-    { 
+    {
         ultimateCharges--;
         Debug.Log("Remaining Ultimate charges: " + ultimateCharges); // 궁극기 사용 후 남은 횟수 표시
         arcJumpTimer = arcJumpCooldown;
@@ -187,4 +187,10 @@ public class PlayerAttack : MonoBehaviour
         particles.gameObject.SetActive(false); // 파티클 비활성화
         canAttack = true;
     }
+<<<<<<< Updated upstream
 }
+=======
+}
+message.txt
+6KB
+>>>>>>> Stashed changes
