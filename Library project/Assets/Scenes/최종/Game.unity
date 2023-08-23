@@ -610,6 +610,18 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1958526466302061415, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
+      propertyPath: m_Size.x
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 1958526466302061415, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
+      propertyPath: m_Size.y
+      value: 4.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4190796755680330336, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
+      propertyPath: m_Radius
+      value: 4
+      objectReference: {fileID: 0}
     - target: {fileID: 6437578450650514384, guid: 31ce06f15e203488a85df8e52a1cb3c1, type: 3}
       propertyPath: m_Name
       value: PotatoChip
