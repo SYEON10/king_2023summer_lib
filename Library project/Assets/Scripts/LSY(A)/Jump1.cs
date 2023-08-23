@@ -23,7 +23,7 @@ public class Jump1 : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            rigid.AddForce(Vector3.up * 15, ForceMode.Impulse);
+            rigid.AddForce(Vector3.up * 45 , ForceMode.Impulse);
         }
     }
 }
