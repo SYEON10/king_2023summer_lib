@@ -5,7 +5,6 @@ using UnityEngine;
 
 public class GameScene : BaseScene
 {
-    private EnemyAIController _enemy;
     private void Start()
     {
         Init();
@@ -15,9 +14,6 @@ public class GameScene : BaseScene
     {
         base.Init();
         SceneType = Define.Scene.Game;
-        
-        _enemy = Util.GetOrCreateObject("@EnemyController").GetOrAddComponent<EnemyAIController>();
-        _enemy.Init();
     }
     
 }

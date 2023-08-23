@@ -9,6 +9,7 @@ TagManager:
   - PlayerBullet
   - MonsterBullet
   - Floor
+  - Spawner
   layers:
   - Default
   - TransparentFX

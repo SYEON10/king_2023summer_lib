@@ -9,7 +9,8 @@ public class BossScene : BaseScene
     private BossController _boss;
     private EnemyAIController _enemy;
     private Coroutine _clearCoroutine;
-    
+    private const float _stopWatch = 60.0f;
+
     private void Start()
     {
         Init();
@@ -22,9 +23,6 @@ public class BossScene : BaseScene
         GameManager.Sound.Play("BossBGM", Define.Sound.Bgm);
 
         SceneType = Define.Scene.Boss;
-        
-        GameManager.Input.KeyAction -= OnUpdate;
-        GameManager.Input.KeyAction += OnUpdate;
 
         GameManager.EnemyCount = 0;
 
@@ -33,18 +31,20 @@ public class BossScene : BaseScene
         _enemy = Util.GetOrCreateObject("@EnemyController").GetOrAddComponent<EnemyAIController>();
         
         _enemy.Init();
+        GameManager.Timer = _stopWatch;
 
         StartCoroutine(GameClear_Coroutine());
     }
 
-    public void OnUpdate()
+    public void Update()
     {
         _enemy.OnUpdate();
+        GameManager.Timer -= Time.deltaTime;
     }
 
     IEnumerator GameClear_Coroutine()
     {
-        yield return new WaitForSeconds(100.0f);
+        yield return new WaitForSeconds(_stopWatch);
         GameClear();
     }
 
