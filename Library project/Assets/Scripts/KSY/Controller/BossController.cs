@@ -6,7 +6,7 @@ public class BossController : MonoBehaviour
 {
     private void OnTriggerEnter(Collider other)
     {
-        if (other.name != "Player")
+        if (other.tag == "Enemy")
         {
             GameManager.GameOver();
             GameManager.BossAlive = false;

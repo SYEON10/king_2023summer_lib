@@ -12,9 +12,9 @@ public class time : MonoBehaviour
         if (isInteracting)
         {
             float elapsedTime = Time.time - interactionTime;
-            float remainingTime = maxInteractionTime - elapsedTime;
+            GameManager.Timer = maxInteractionTime - elapsedTime;
 
-            if (remainingTime <= 0f)
+            if (GameManager.Timer <= 0f)
             {
                 Debug.Log("Time's up!");
                 isInteracting = false;
@@ -22,7 +22,7 @@ public class time : MonoBehaviour
             }
             else
             {
-                int remainingTimeInt = Mathf.FloorToInt(remainingTime); // 소수점 아래를 버림처리하여 정수로 변환
+                int remainingTimeInt = Mathf.FloorToInt(GameManager.Timer); // 소수점 아래를 버림처리하여 정수로 변환
                 Debug.Log("남은 시간 : " + remainingTimeInt + "초");
             }
         }
