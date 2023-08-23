@@ -10,6 +10,7 @@ TagManager:
   - MonsterBullet
   - Floor
   - Spawner
+  - Platform
   layers:
   - Default
   - TransparentFX
