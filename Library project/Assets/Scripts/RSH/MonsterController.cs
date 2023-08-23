@@ -154,6 +154,7 @@ public class MonsterController : BaseController
 
 	public void MonsterDie()
 	{
+		GameManager.Sound.Play("MonsterDead", Sound.Effect);
 		Destroy(gameObject);
 	}
 }
